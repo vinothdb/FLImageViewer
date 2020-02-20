@@ -10,5 +10,6 @@ import UIKit
 
 let FLBundle = Bundle(identifier: "com.iosapp.FLImageViewer")
 
-let FLActionButtonSize: CGFloat = 50
+let FLSizeForActionWithIcon: CGFloat = 30
+let FLSizeForActionWithTitle: CGFloat = 60
 

@@ -27,6 +27,8 @@ class FLImageDataSource : UITableViewDiffableDataSource<String, String> {
     
     func apply(images: [FLImage]) {
         
+        self.defaultRowAnimation = .fade
+        
         let keys:[String] = images.map { $0.uniqueKey }
         
         var snapshot = FLImageDataSourceSnapShot()

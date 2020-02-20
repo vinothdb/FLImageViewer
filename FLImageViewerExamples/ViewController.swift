@@ -24,9 +24,15 @@ class ViewController: UIViewController {
         
         let viewer = FLImageViewer(config: config)
         
-        config.addAction(image: #imageLiteral(resourceName: "close"), alignment: .topRight, action: {
+        viewer.addAction(image: UIImage(systemName: "xmark.circle"), alignment: .topLeft, action: { _,_ in
             viewer.viewController?.dismiss(animated: true, completion: nil)
         })
+
+        viewer.addAction(title: "Done", alignment: .topRight, action: { _,_ in
+            viewer.viewController?.dismiss(animated: true, completion: nil)
+        })
+        
+        viewer.addDeleteAction()
         
         guard let imageViewController = viewer.viewController else {
             return

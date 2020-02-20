@@ -20,3 +20,12 @@ extension UIView {
         return FLBundle?.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)?.first as? UIView
     }
 }
+
+extension UIImage {
+    
+    class func systemImage(_ name: String) -> UIImage? {    
+        guard #available(iOS 13, *) else { return nil }
+        
+        return UIImage(systemName: name)
+    }
+}

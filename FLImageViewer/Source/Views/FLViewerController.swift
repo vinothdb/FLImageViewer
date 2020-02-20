@@ -70,6 +70,11 @@ class FLViewerController: UIViewController {
         self.containerView.transform = CGAffineTransform(rotationAngle: -.pi/2)
         self.viewerTable.delegate = self
         
+        self.reloadTables()
+    }
+    
+    private func reloadTables() {
+       
         if #available(iOS 13, *) {
             self.viewerTableDatasource.apply(images: self.images)
         } else {
@@ -174,5 +179,18 @@ extension FLViewerController : UITableViewDataSource {
         
         default: return UITableViewCell()
         }
+    }
+}
+
+
+extension FLViewerController {
+    
+    func currentImageIndex() -> Int? {
+        return self.viewerTable.indexPathForRow(at: self.viewerTable.contentOffset)?.row
+    }
+    
+    func reloadImages(images: [FLImage]) {
+        self.images = images
+        self.reloadTables()
     }
 }
