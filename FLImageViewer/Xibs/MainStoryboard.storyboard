@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Viewer Controller-->
+        <scene sceneID="dAc-m3-Ruu">
+            <objects>
+                <viewController storyboardIdentifier="FLViewerControllerStoryboardId" id="Bm4-v4-k3y" customClass="FLViewerController" customModule="FLImageViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fy2-67-LcV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQT-Lb-CHI">
+                                <rect key="frame" x="0.0" y="20" width="414" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aG6-o2-bde">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qih-bV-adW"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDM-vk-REI">
+                                <rect key="frame" x="-112" y="241" width="638" height="414"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-BX-Iy4">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="414"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="qfV-mo-gNJ"/>
+                                        </constraints>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TileListTableCellId" id="I1R-eN-pO0" customClass="TileListCell" customModule="FLImageViewer" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="80" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I1R-eN-pO0" id="x0C-Lv-0jP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwM-8k-0rd" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="WwM-8k-0rd" firstAttribute="top" secondItem="x0C-Lv-0jP" secondAttribute="top" id="LrY-7i-9BI"/>
+                                                        <constraint firstItem="WwM-8k-0rd" firstAttribute="leading" secondItem="x0C-Lv-0jP" secondAttribute="leading" id="ZOa-yB-8Sx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="WwM-8k-0rd" secondAttribute="trailing" id="ehc-Ch-RyE"/>
+                                                        <constraint firstAttribute="bottom" secondItem="WwM-8k-0rd" secondAttribute="bottom" id="uEP-LI-PNY"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="fl_imageview" destination="WwM-8k-0rd" id="EkA-dS-6eZ"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TiE-2W-ygV">
+                                        <rect key="frame" x="90" y="0.0" width="548" height="414"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ViewerTableCellId" id="axs-Ke-pEF" customClass="ViewerTableCell" customModule="FLImageViewer" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="548" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="axs-Ke-pEF" id="kJn-jY-lzH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="548" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7K-gc-3lZ" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="548" height="44"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="m7K-gc-3lZ" secondAttribute="bottom" id="3dn-0p-ngB"/>
+                                                        <constraint firstItem="m7K-gc-3lZ" firstAttribute="top" secondItem="kJn-jY-lzH" secondAttribute="top" id="YMq-uu-2kN"/>
+                                                        <constraint firstItem="m7K-gc-3lZ" firstAttribute="leading" secondItem="kJn-jY-lzH" secondAttribute="leading" id="dRQ-e4-Gmn"/>
+                                                        <constraint firstAttribute="trailing" secondItem="m7K-gc-3lZ" secondAttribute="trailing" id="gk5-vU-0j9"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="fl_imageview" destination="m7K-gc-3lZ" id="6m9-7i-eWX"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iqx-wS-vrH">
+                                <rect key="frame" x="0.0" y="826" width="414" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm7-M2-7al">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QxS-K4-ScL"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qDM-vk-REI" firstAttribute="height" secondItem="ck0-2R-OcP" secondAttribute="width" id="4gg-cR-qYc"/>
+                            <constraint firstItem="qDM-vk-REI" firstAttribute="centerY" secondItem="Fy2-67-LcV" secondAttribute="centerY" id="8ya-dA-Ika"/>
+                            <constraint firstItem="Iqx-wS-vrH" firstAttribute="leading" secondItem="ck0-2R-OcP" secondAttribute="leading" id="PbO-ZP-EV9"/>
+                            <constraint firstItem="Iqx-wS-vrH" firstAttribute="trailing" secondItem="ck0-2R-OcP" secondAttribute="trailing" id="Q1i-Tk-lrl"/>
+                            <constraint firstItem="qDM-vk-REI" firstAttribute="centerX" secondItem="Fy2-67-LcV" secondAttribute="centerX" id="aGw-ip-rcI"/>
+                            <constraint firstItem="qDM-vk-REI" firstAttribute="width" secondItem="ck0-2R-OcP" secondAttribute="height" constant="-180" id="b7x-BD-Ec3"/>
+                            <constraint firstItem="pQT-Lb-CHI" firstAttribute="top" secondItem="Fy2-67-LcV" secondAttribute="top" constant="20" id="mYQ-io-ImH"/>
+                            <constraint firstAttribute="bottom" secondItem="Iqx-wS-vrH" secondAttribute="bottom" constant="20" id="qzg-0B-Qtv"/>
+                            <constraint firstItem="pQT-Lb-CHI" firstAttribute="leading" secondItem="ck0-2R-OcP" secondAttribute="leading" id="web-rB-p9k"/>
+                            <constraint firstItem="pQT-Lb-CHI" firstAttribute="trailing" secondItem="ck0-2R-OcP" secondAttribute="trailing" id="wwc-Ah-dqf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ck0-2R-OcP"/>
+                    </view>
+                    <connections>
+                        <outlet property="actionsAtBottonStack" destination="Iqx-wS-vrH" id="W8l-98-Ddi"/>
+                        <outlet property="actionsAtTopStack" destination="pQT-Lb-CHI" id="dkG-nZ-wN2"/>
+                        <outlet property="buttomActionStackDummyView" destination="bm7-M2-7al" id="tFU-4G-nlA"/>
+                        <outlet property="containerView" destination="qDM-vk-REI" id="8Qg-6o-aL0"/>
+                        <outlet property="tileListTable" destination="6lH-BX-Iy4" id="Efx-xX-kpB"/>
+                        <outlet property="tileListWidthConstraint" destination="qfV-mo-gNJ" id="B9Q-Tz-UOl"/>
+                        <outlet property="topActionStackDummyView" destination="aG6-o2-bde" id="Lkf-Ow-EN9"/>
+                        <outlet property="viewerTable" destination="TiE-2W-ygV" id="0Wj-X6-srf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ry-YM-Kyo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-86" y="-255"/>
+        </scene>
+    </scenes>
+</document>

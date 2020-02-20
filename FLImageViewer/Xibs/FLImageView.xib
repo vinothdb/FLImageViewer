@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="ABt-1f-Ehw" id="CAj-On-oM4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="IIE-Yi-hxa">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ABt-1f-Ehw">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="bottom" secondItem="IIE-Yi-hxa" secondAttribute="bottom" id="68o-wS-rJY"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="leading" secondItem="IIE-Yi-hxa" secondAttribute="leading" id="N7b-KX-yhg"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="centerX" secondItem="IIE-Yi-hxa" secondAttribute="centerX" id="dgG-Ic-dtY"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="bottom" secondItem="cXp-aK-ggO" secondAttribute="bottom" id="giD-4g-jHg"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="top" secondItem="IIE-Yi-hxa" secondAttribute="top" id="nuf-FL-YnJ"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="trailing" secondItem="IIE-Yi-hxa" secondAttribute="trailing" id="qFb-Kw-vB8"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="top" secondItem="IIE-Yi-hxa" secondAttribute="top" id="s0F-u5-lBB"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="1Lb-Ua-0xs"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="cXp-aK-ggO"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="nuf-FL-YnJ"/>
+                        </mask>
+                    </variation>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="IIE-Yi-hxa" secondAttribute="bottom" id="Edx-Mu-jdi"/>
+                <constraint firstAttribute="trailing" secondItem="IIE-Yi-hxa" secondAttribute="trailing" id="UA8-Wp-qzA"/>
+                <constraint firstItem="IIE-Yi-hxa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yih-Lt-k4Y"/>
+                <constraint firstItem="IIE-Yi-hxa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nRb-Vq-OpO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="131.8840579710145" y="168.08035714285714"/>
+        </view>
+    </objects>
+</document>
