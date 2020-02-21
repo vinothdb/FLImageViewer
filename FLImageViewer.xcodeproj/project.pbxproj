@@ -12,7 +12,7 @@
 		18390B5C23FABD9000CE6EE0 /* TileListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18390B5B23FABD9000CE6EE0 /* TileListTableCell.swift */; };
 		184C5B8923F68BCC001327BA /* ViewerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8823F68BCC001327BA /* ViewerTableCell.swift */; };
 		184C5B8B23F6942B001327BA /* FLImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8A23F6942B001327BA /* FLImageDataSource.swift */; };
-		184C5B8D23F69C1B001327BA /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8C23F69C1B001327BA /* AppExtensions.swift */; };
+		184C5B8D23F69C1B001327BA /* FLAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */; };
 		18525BA523F6816D009140CC /* FLStoryboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18525BA423F6816D009140CC /* FLStoryboardHelper.swift */; };
 		1891C3CC23F586F9000AFA9F /* FLImageViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1891C3CA23F586F9000AFA9F /* FLImageViewer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1891C3D423F587C9000AFA9F /* FLImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891C3D323F587C9000AFA9F /* FLImageViewer.swift */; };
@@ -60,7 +60,7 @@
 		18390B5B23FABD9000CE6EE0 /* TileListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileListTableCell.swift; sourceTree = "<group>"; };
 		184C5B8823F68BCC001327BA /* ViewerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerTableCell.swift; sourceTree = "<group>"; };
 		184C5B8A23F6942B001327BA /* FLImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImageDataSource.swift; sourceTree = "<group>"; };
-		184C5B8C23F69C1B001327BA /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
+		184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAppExtensions.swift; sourceTree = "<group>"; };
 		18525BA423F6816D009140CC /* FLStoryboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLStoryboardHelper.swift; sourceTree = "<group>"; };
 		1891C3C723F586F9000AFA9F /* FLImageViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FLImageViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1891C3CA23F586F9000AFA9F /* FLImageViewer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLImageViewer.h; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 				1891C3D523F5891A000AFA9F /* FLConstants.swift */,
 				18525BA423F6816D009140CC /* FLStoryboardHelper.swift */,
 				184C5B8A23F6942B001327BA /* FLImageDataSource.swift */,
-				184C5B8C23F69C1B001327BA /* AppExtensions.swift */,
+				184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 				18390B5C23FABD9000CE6EE0 /* TileListTableCell.swift in Sources */,
 				1891C3D623F5891A000AFA9F /* FLConstants.swift in Sources */,
 				184C5B8923F68BCC001327BA /* ViewerTableCell.swift in Sources */,
-				184C5B8D23F69C1B001327BA /* AppExtensions.swift in Sources */,
+				184C5B8D23F69C1B001327BA /* FLAppExtensions.swift in Sources */,
 				18A153A223FD674900750905 /* FLButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,7 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WBU47M44PJ;
 				INFOPLIST_FILE = FLImageViewerExamples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -560,7 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WBU47M44PJ;
 				INFOPLIST_FILE = FLImageViewerExamples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

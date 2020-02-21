@@ -31,6 +31,13 @@ class FLViewerController: UIViewController {
     
     private var topActionStackDummyViewIndex = 0
     private var bottomActionStackDummyViewIndex = 0
+    private var viewerTable_isAutoScrolling = false
+    private var tileListSelectedIndexpath = IndexPath(row: 0, section: 0) {
+        willSet(value) {
+            print("old value \(self.tileListSelectedIndexpath) and new value \(value)")
+            self.updateTileListCellSelected(self.tileListSelectedIndexpath, new: value)
+        }
+    }
     
     @available(iOS 13.0, *)
     private lazy var viewerTableDatasource: FLImageDataSource = {
@@ -86,14 +93,28 @@ class FLViewerController: UIViewController {
             return
         }
         
+        let highlightCurrentCell = {
+            guard self.viewerTable.hasIndexPath(self.tileListSelectedIndexpath) else {
+                if let newIndexPath = self.viewerTable.indexPathForRow(at: self.viewerTable.contentOffset) {
+                    self.tileListSelectedIndexpath = newIndexPath
+                }
+                return
+            }
+            //Highlight first cell as selected
+            self.updateTileListCellSelected(nil, new: self.tileListSelectedIndexpath)
+        }
+        
         self.tileListTable.delegate = self
         self.tileListWidthConstraint.constant = tileCellSize
         
         if #available(iOS 13, *) {
-            self.tileListTableDatasource.apply(images: self.images)
+            self.tileListTableDatasource.apply(images: self.images) {
+                highlightCurrentCell()
+            }
         } else {
             self.tileListTable.dataSource = self
             self.tileListTable.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: highlightCurrentCell)
         }
     }
     
@@ -130,27 +151,46 @@ extension FLViewerController : UITableViewDelegate {
         }
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard scrollView == self.viewerTable else { return }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        guard scrollView == self.viewerTable else { return }
+        viewerTable_isAutoScrolling = false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard self.showTileList, scrollView == self.viewerTable else {
-            return
-        }
         
-        guard let viewerTableScrolledToIndexPath = self.viewerTable.indexPathForRow(at: scrollView.contentOffset),
-            self.tileListTable.indexPathForSelectedRow !=  viewerTableScrolledToIndexPath else {
+        guard self.showTileList, !self.viewerTable_isAutoScrolling,
+            scrollView == self.viewerTable,
+            let viewerTableScrolledToIndexPath = self.viewerTable.indexPathForRow(at: scrollView.contentOffset) else {
                 return
         }
         
-        self.tileListTable.selectRow(at: viewerTableScrolledToIndexPath, animated: true, scrollPosition: .middle)
+        self.tileListSelectedIndexpath = viewerTableScrolledToIndexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: false)
-        guard tableView == self.tileListTable else {
+
+        guard tableView == self.tileListTable, self.tileListSelectedIndexpath != indexPath else {
             return
         }
-        
+        self.viewerTable_isAutoScrolling = true
         self.viewerTable.scrollToRow(at: indexPath, at: .middle, animated: true)
+        self.tileListSelectedIndexpath = indexPath
+    }
+    
+    func updateTileListCellSelected(_ old: IndexPath?, new: IndexPath) {
+        guard old !=  new else {
+            return
+        }
+        if let oldIndexPath = old, let prevCell = self.tileListTable.cellForRow(at: oldIndexPath) as? TileListCell {
+            prevCell.setSelected(false)
+        }
+        if let cell = self.tileListTable.cellForRow(at: new) as? TileListCell {
+            cell.setSelected(true)
+        }
     }
 }
 

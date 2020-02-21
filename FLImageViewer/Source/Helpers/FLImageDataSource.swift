@@ -25,7 +25,7 @@ extension FLImageDataSourceSnapShot {
 @available(iOS 13, *)
 class FLImageDataSource : UITableViewDiffableDataSource<String, String> {
     
-    func apply(images: [FLImage]) {
+    func apply(images: [FLImage], completion: (()->Void)? = nil) {
         
         self.defaultRowAnimation = .fade
         
@@ -34,6 +34,6 @@ class FLImageDataSource : UITableViewDiffableDataSource<String, String> {
         var snapshot = FLImageDataSourceSnapShot()
         snapshot.appendImages(imageKeys: keys)
         
-        self.apply(snapshot, animatingDifferences: true)
+        self.apply(snapshot, animatingDifferences: true, completion: completion) 
     }
 }
