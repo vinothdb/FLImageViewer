@@ -35,4 +35,9 @@ class TileListCell: FLImageTableCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    func setSelected(_ select:Bool) {
+        fl_imageview.layer.borderColor = select ? UIColor.blue.cgColor : UIColor.clear.cgColor
+        fl_imageview.layer.borderWidth = select ? 2 : 0
+    }
 }

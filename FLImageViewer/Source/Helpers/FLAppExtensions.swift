@@ -1,5 +1,5 @@
 //
-//  AppExtensions.swift
+//  FLAppExtensions.swift
 //  FLImageViewer
 //
 //  Created by Vinoth on 14/02/20.
@@ -27,5 +27,12 @@ extension UIImage {
         guard #available(iOS 13, *) else { return nil }
         
         return UIImage(systemName: name)
+    }
+}
+
+extension UITableView {
+    
+    func hasIndexPath(_ indexPath: IndexPath) -> Bool {
+        return self.numberOfSections > indexPath.section && self.numberOfRows(inSection: indexPath.section) > indexPath.row
     }
 }
