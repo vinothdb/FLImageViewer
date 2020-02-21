@@ -24,9 +24,11 @@ class ViewController: UIViewController {
         
         let viewer = FLImageViewer(config: config)
         
-        viewer.addAction(image: UIImage(systemName: "xmark.circle"), alignment: .topLeft, action: { _,_ in
-            viewer.viewController?.dismiss(animated: true, completion: nil)
-        })
+        if #available(iOS 13.0, *) {
+            viewer.addAction(image: UIImage(systemName: "xmark.circle"), alignment: .topLeft, action: { _,_ in
+                viewer.viewController?.dismiss(animated: true, completion: nil)
+            })
+        }
 
         viewer.addAction(title: "Done", alignment: .topRight, action: { _,_ in
             viewer.viewController?.dismiss(animated: true, completion: nil)
