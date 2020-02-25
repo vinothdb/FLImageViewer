@@ -24,7 +24,7 @@ class FLImageTableCell : UITableViewCell {
     }
 }
 
-class TileListCell: FLImageTableCell {
+class FLTileListCell: FLImageTableCell {
 
     @IBOutlet weak var fl_imageview: FLImageView!
     

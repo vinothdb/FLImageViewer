@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		1833A87423FD1A6600B26238 /* FLImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1833A87323FD1A6600B26238 /* FLImageView.xib */; };
 		1833A87723FD1DFD00B26238 /* FLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1833A87623FD1DFD00B26238 /* FLImageView.swift */; };
-		18390B5C23FABD9000CE6EE0 /* TileListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18390B5B23FABD9000CE6EE0 /* TileListTableCell.swift */; };
-		184C5B8923F68BCC001327BA /* ViewerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8823F68BCC001327BA /* ViewerTableCell.swift */; };
+		18390B5C23FABD9000CE6EE0 /* FLTileListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18390B5B23FABD9000CE6EE0 /* FLTileListTableCell.swift */; };
+		184C5B8923F68BCC001327BA /* FLViewerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8823F68BCC001327BA /* FLViewerTableCell.swift */; };
 		184C5B8B23F6942B001327BA /* FLImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8A23F6942B001327BA /* FLImageDataSource.swift */; };
 		184C5B8D23F69C1B001327BA /* FLAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */; };
 		18525BA523F6816D009140CC /* FLStoryboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18525BA423F6816D009140CC /* FLStoryboardHelper.swift */; };
@@ -18,7 +18,7 @@
 		1891C3D423F587C9000AFA9F /* FLImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891C3D323F587C9000AFA9F /* FLImageViewer.swift */; };
 		1891C3D623F5891A000AFA9F /* FLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891C3D523F5891A000AFA9F /* FLConstants.swift */; };
 		1891C3DD23F58BD2000AFA9F /* FLViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891C3DC23F58BD2000AFA9F /* FLViewerController.swift */; };
-		1891C3E123F59257000AFA9F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1891C3E023F59257000AFA9F /* MainStoryboard.storyboard */; };
+		1891C3E123F59257000AFA9F /* FLMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1891C3E023F59257000AFA9F /* FLMainStoryboard.storyboard */; };
 		18A153A223FD674900750905 /* FLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A153A123FD674900750905 /* FLButton.swift */; };
 		18A9088923FE751C0015AEA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9088823FE751C0015AEA5 /* AppDelegate.swift */; };
 		18A9088B23FE751C0015AEA5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9088A23FE751C0015AEA5 /* SceneDelegate.swift */; };
@@ -57,8 +57,8 @@
 /* Begin PBXFileReference section */
 		1833A87323FD1A6600B26238 /* FLImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FLImageView.xib; sourceTree = "<group>"; };
 		1833A87623FD1DFD00B26238 /* FLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImageView.swift; sourceTree = "<group>"; };
-		18390B5B23FABD9000CE6EE0 /* TileListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileListTableCell.swift; sourceTree = "<group>"; };
-		184C5B8823F68BCC001327BA /* ViewerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerTableCell.swift; sourceTree = "<group>"; };
+		18390B5B23FABD9000CE6EE0 /* FLTileListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLTileListTableCell.swift; sourceTree = "<group>"; };
+		184C5B8823F68BCC001327BA /* FLViewerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLViewerTableCell.swift; sourceTree = "<group>"; };
 		184C5B8A23F6942B001327BA /* FLImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImageDataSource.swift; sourceTree = "<group>"; };
 		184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAppExtensions.swift; sourceTree = "<group>"; };
 		18525BA423F6816D009140CC /* FLStoryboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLStoryboardHelper.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		1891C3D323F587C9000AFA9F /* FLImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImageViewer.swift; sourceTree = "<group>"; };
 		1891C3D523F5891A000AFA9F /* FLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLConstants.swift; sourceTree = "<group>"; };
 		1891C3DC23F58BD2000AFA9F /* FLViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLViewerController.swift; sourceTree = "<group>"; };
-		1891C3E023F59257000AFA9F /* MainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		1891C3E023F59257000AFA9F /* FLMainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FLMainStoryboard.storyboard; sourceTree = "<group>"; };
 		18A153A123FD674900750905 /* FLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLButton.swift; sourceTree = "<group>"; };
 		18A9088623FE751C0015AEA5 /* FLImageViewerExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLImageViewerExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A9088823FE751C0015AEA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				1891C3DC23F58BD2000AFA9F /* FLViewerController.swift */,
-				184C5B8823F68BCC001327BA /* ViewerTableCell.swift */,
-				18390B5B23FABD9000CE6EE0 /* TileListTableCell.swift */,
+				184C5B8823F68BCC001327BA /* FLViewerTableCell.swift */,
+				18390B5B23FABD9000CE6EE0 /* FLTileListTableCell.swift */,
 				1833A87623FD1DFD00B26238 /* FLImageView.swift */,
 				18A153A123FD674900750905 /* FLButton.swift */,
 			);
@@ -165,7 +165,7 @@
 		1891C3D723F589C1000AFA9F /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				1891C3E023F59257000AFA9F /* MainStoryboard.storyboard */,
+				1891C3E023F59257000AFA9F /* FLMainStoryboard.storyboard */,
 				1833A87323FD1A6600B26238 /* FLImageView.xib */,
 			);
 			path = Xibs;
@@ -287,7 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1833A87423FD1A6600B26238 /* FLImageView.xib in Resources */,
-				1891C3E123F59257000AFA9F /* MainStoryboard.storyboard in Resources */,
+				1891C3E123F59257000AFA9F /* FLMainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,9 +313,9 @@
 				1891C3DD23F58BD2000AFA9F /* FLViewerController.swift in Sources */,
 				18525BA523F6816D009140CC /* FLStoryboardHelper.swift in Sources */,
 				184C5B8B23F6942B001327BA /* FLImageDataSource.swift in Sources */,
-				18390B5C23FABD9000CE6EE0 /* TileListTableCell.swift in Sources */,
+				18390B5C23FABD9000CE6EE0 /* FLTileListTableCell.swift in Sources */,
 				1891C3D623F5891A000AFA9F /* FLConstants.swift in Sources */,
-				184C5B8923F68BCC001327BA /* ViewerTableCell.swift in Sources */,
+				184C5B8923F68BCC001327BA /* FLViewerTableCell.swift in Sources */,
 				184C5B8D23F69C1B001327BA /* FLAppExtensions.swift in Sources */,
 				18A153A223FD674900750905 /* FLButton.swift in Sources */,
 			);
@@ -504,7 +504,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -530,7 +530,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -549,7 +549,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosapp.FLImageViewerExamples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -568,7 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosapp.FLImageViewerExamples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -1,5 +1,5 @@
 //
-//  ViewerTableCell.swift
+//  FLViewerTableCell.swift
 //  FLImageViewer
 //
 //  Created by Vinoth on 14/02/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewerTableCell: FLImageTableCell {
+class FLViewerTableCell: FLImageTableCell {
 
     @IBOutlet weak var fl_imageview: FLImageView!
     
@@ -21,7 +21,7 @@ class ViewerTableCell: FLImageTableCell {
     }
 }
 
-extension ViewerTableCell: UIScrollViewDelegate {
+extension FLViewerTableCell: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.fl_imageview
     }

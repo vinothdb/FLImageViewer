@@ -34,7 +34,6 @@ class FLViewerController: UIViewController {
     private var viewerTable_isAutoScrolling = false
     private var tileListSelectedIndexpath = IndexPath(row: 0, section: 0) {
         willSet(value) {
-            print("old value \(self.tileListSelectedIndexpath) and new value \(value)")
             self.updateTileListCellSelected(self.tileListSelectedIndexpath, new: value)
         }
     }
@@ -43,7 +42,7 @@ class FLViewerController: UIViewController {
     private lazy var viewerTableDatasource: FLImageDataSource = {
         FLImageDataSource(tableView: self.viewerTable) { (table, indexPath, _) in
             
-            let cell : ViewerTableCell = .cell(forTable: table, indexPath: indexPath, identifier: "ViewerTableCellId")
+            let cell : FLViewerTableCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLViewerTableCellId")
             cell.fl_imageview.image = self.images[indexPath.row].image
             
             return cell
@@ -54,7 +53,7 @@ class FLViewerController: UIViewController {
     private lazy var tileListTableDatasource: FLImageDataSource = {
         FLImageDataSource(tableView: self.tileListTable) { (table, indexPath, _) in
             
-            let cell : TileListCell = .cell(forTable: table, indexPath: indexPath, identifier: "TileListTableCellId")
+            let cell : FLTileListCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLTileListCellId")
             cell.fl_imageview.contentMode = .scaleToFill
             cell.fl_imageview.image = self.images[indexPath.row].image
             
@@ -185,10 +184,10 @@ extension FLViewerController : UITableViewDelegate {
         guard old !=  new else {
             return
         }
-        if let oldIndexPath = old, let prevCell = self.tileListTable.cellForRow(at: oldIndexPath) as? TileListCell {
+        if let oldIndexPath = old, let prevCell = self.tileListTable.cellForRow(at: oldIndexPath) as? FLTileListCell {
             prevCell.setSelected(false)
         }
-        if let cell = self.tileListTable.cellForRow(at: new) as? TileListCell {
+        if let cell = self.tileListTable.cellForRow(at: new) as? FLTileListCell {
             cell.setSelected(true)
         }
     }
@@ -205,13 +204,13 @@ extension FLViewerController : UITableViewDataSource {
         switch tableView {
         
         case self.viewerTable:
-            let cell : ViewerTableCell = .cell(forTable: tableView, indexPath: indexPath, identifier: "ViewerTableCellId")
+            let cell : FLViewerTableCell = .cell(forTable: tableView, indexPath: indexPath, identifier: "FLViewerTableCellId")
             cell.fl_imageview.image = self.images[indexPath.row].image
             
             return cell
         
         case self.tileListTable:
-            let cell : TileListCell = .cell(forTable: tableView, indexPath: indexPath, identifier: "TileListTableCellId")
+            let cell : FLTileListCell = .cell(forTable: tableView, indexPath: indexPath, identifier: "FLTileListCellId")
             cell.fl_imageview.contentMode = .scaleToFill
             cell.fl_imageview.image = self.images[indexPath.row].image
             
