@@ -16,7 +16,7 @@ enum FLViewControllers {
     private var storyboardName: String {
         switch self {
         case .ImageViewer:
-            return "MainStoryboard"
+            return "FLMainStoryboard"
         }
     }
     
