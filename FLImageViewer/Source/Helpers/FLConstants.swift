@@ -8,8 +8,6 @@
 
 import UIKit
 
-let FLBundle = Bundle(identifier: "com.iosapp.FLImageViewer")
-
 let FLSizeForActionWithIcon: CGFloat = 30
 let FLSizeForActionWithTitle: CGFloat = 60
 
