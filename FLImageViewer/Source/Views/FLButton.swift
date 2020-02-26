@@ -12,6 +12,8 @@ class FLButton : UIButton {
     
     var action : (()->Void)? = nil
     
+    
+    
     class func button(title: String? = nil,
                       icon: UIImage? = nil,
                       backgroundColor: UIColor = .clear,
@@ -25,7 +27,7 @@ class FLButton : UIButton {
         button.addConstraint(button.widthAnchor.constraint(lessThanOrEqualToConstant: buttonWidth))
     
         button.backgroundColor = backgroundColor
-        button.tintColor = .white
+        button.tintColor = AppColor.content
         
         if cornerRadius != 0 {
             button.layer.masksToBounds = true
@@ -34,6 +36,7 @@ class FLButton : UIButton {
         
         if let titleText = title {
             button.setTitle(titleText, for: .normal)
+            button.setTitleColor(AppColor.content, for: .normal)
             button.sizeToFit()
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.minimumScaleFactor = 0.7

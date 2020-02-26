@@ -14,6 +14,8 @@
 		184C5B8B23F6942B001327BA /* FLImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8A23F6942B001327BA /* FLImageDataSource.swift */; };
 		184C5B8D23F69C1B001327BA /* FLAppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */; };
 		18525BA523F6816D009140CC /* FLStoryboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18525BA423F6816D009140CC /* FLStoryboardHelper.swift */; };
+		188184F22406B64B006441AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188184F12406B64B006441AA /* Assets.xcassets */; };
+		188184F32406B689006441AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A9089123FE751F0015AEA5 /* Assets.xcassets */; };
 		1891C3CC23F586F9000AFA9F /* FLImageViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1891C3CA23F586F9000AFA9F /* FLImageViewer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1891C3D423F587C9000AFA9F /* FLImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891C3D323F587C9000AFA9F /* FLImageViewer.swift */; };
 		1891C3D623F5891A000AFA9F /* FLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891C3D523F5891A000AFA9F /* FLConstants.swift */; };
@@ -24,7 +26,6 @@
 		18A9088B23FE751C0015AEA5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9088A23FE751C0015AEA5 /* SceneDelegate.swift */; };
 		18A9088D23FE751C0015AEA5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9088C23FE751C0015AEA5 /* ViewController.swift */; };
 		18A9089023FE751C0015AEA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A9088E23FE751C0015AEA5 /* Main.storyboard */; };
-		18A9089223FE751F0015AEA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A9089123FE751F0015AEA5 /* Assets.xcassets */; };
 		18A9089523FE751F0015AEA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A9089323FE751F0015AEA5 /* LaunchScreen.storyboard */; };
 		18A9089C23FE76980015AEA5 /* FLImageViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1891C3C723F586F9000AFA9F /* FLImageViewer.framework */; };
 		18A9089D23FE76980015AEA5 /* FLImageViewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1891C3C723F586F9000AFA9F /* FLImageViewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -62,6 +63,7 @@
 		184C5B8A23F6942B001327BA /* FLImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImageDataSource.swift; sourceTree = "<group>"; };
 		184C5B8C23F69C1B001327BA /* FLAppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAppExtensions.swift; sourceTree = "<group>"; };
 		18525BA423F6816D009140CC /* FLStoryboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLStoryboardHelper.swift; sourceTree = "<group>"; };
+		188184F12406B64B006441AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1891C3C723F586F9000AFA9F /* FLImageViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FLImageViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1891C3CA23F586F9000AFA9F /* FLImageViewer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLImageViewer.h; sourceTree = "<group>"; };
 		1891C3CB23F586F9000AFA9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				1891C3D223F5877A000AFA9F /* Source */,
 				1891C3CA23F586F9000AFA9F /* FLImageViewer.h */,
 				1891C3CB23F586F9000AFA9F /* Info.plist */,
+				188184F12406B64B006441AA /* Assets.xcassets */,
 			);
 			path = FLImageViewer;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1833A87423FD1A6600B26238 /* FLImageView.xib in Resources */,
+				188184F22406B64B006441AA /* Assets.xcassets in Resources */,
 				1891C3E123F59257000AFA9F /* FLMainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A9089523FE751F0015AEA5 /* LaunchScreen.storyboard in Resources */,
-				18A9089223FE751F0015AEA5 /* Assets.xcassets in Resources */,
+				188184F32406B689006441AA /* Assets.xcassets in Resources */,
 				18A9089023FE751C0015AEA5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
