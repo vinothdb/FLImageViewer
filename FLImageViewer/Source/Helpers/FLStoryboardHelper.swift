@@ -10,10 +10,7 @@
 import UIKit
 
 let FLBundle: Bundle = {
-    let classBundle = Bundle(for: FLImageViewer.self)
-    var bundleURL = classBundle.resourceURL!
-    bundleURL.appendPathComponent("FLImageViewer.bundle")
-    return Bundle(url: bundleURL)!
+    return Bundle(for: FLImageViewer.self)
 }()
 
 enum FLViewControllers {
