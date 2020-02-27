@@ -11,7 +11,7 @@ import UIKit
 let FLSizeForActionWithIcon: CGFloat = 30
 let FLSizeForActionWithTitle: CGFloat = 60
 
-struct AppColor {
+struct FLAppColor {
     
     static var bg : UIColor {
         if #available(iOS 11.0, *) {
