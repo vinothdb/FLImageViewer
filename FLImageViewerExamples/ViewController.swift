@@ -30,7 +30,7 @@ class ViewController: UIViewController {
             })
         }
 
-        viewer.addAction(title: "Done", alignment: .topRight, action: { _,_ in
+        viewer.addAction(title: "Done",alignment: .topRight, textColor: .blue, action: { _,_ in
             viewer.viewController.dismiss(animated: true, completion: nil)
         })
         

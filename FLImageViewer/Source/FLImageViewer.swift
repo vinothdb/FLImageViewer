@@ -139,6 +139,7 @@ public extension FLImageViewer {
     func addDeleteAction(title: String? = nil,
                          image: UIImage? = nil,
                          alignment: Alignment = .topRight,
+                         textColor: UIColor? = nil,
                          backgroundColor: UIColor = .clear,
                          cornerRadius: CGFloat = 0,
                          completion: ((_ deletedIndex: Int)-> Void)? = nil) {
@@ -147,6 +148,7 @@ public extension FLImageViewer {
         
         let action = FLButton.button(title: title,
                                      icon: image,
+                                     textColor: textColor,
                                      backgroundColor: backgroundColor,
                                      cornerRadius: cornerRadius) {
                                         
@@ -177,12 +179,14 @@ public extension FLImageViewer {
     func addAction(title: String? = nil,
                    image: UIImage? = nil,
                    alignment: Alignment,
+                   textColor: UIColor? = nil,
                    backgroundColor: UIColor = .clear,
                    cornerRadius: CGFloat = 0,
                    action: @escaping ((_ images: [UIImage], _ currentImageIndex: Int)-> Void)) {
         
         let action = FLButton.button(title: title,
                                      icon: image,
+                                     textColor: textColor,
                                      backgroundColor: backgroundColor,
                                      cornerRadius: cornerRadius) {
                                         
