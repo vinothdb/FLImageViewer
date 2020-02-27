@@ -56,6 +56,7 @@ class FLViewerController: UIViewController {
             let cell : FLTileListCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLTileListCellId")
             cell.fl_imageview.contentMode = .scaleToFill
             cell.fl_imageview.image = self.images[indexPath.row].image
+            cell.setSelected(indexPath == self.tileListSelectedIndexpath)
             
             return cell
         }
@@ -115,6 +116,19 @@ class FLViewerController: UIViewController {
             self.tileListTable.reloadData()
             DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: highlightCurrentCell)
         }
+        self.setTilesTableEdgeInsets()
+    }
+    
+    //Aligns cell to the center of Table
+    private func setTilesTableEdgeInsets() {
+        
+        var inset = self.tileListTable.bounds.height
+        let totalCellsHeight = self.tileListTable.bounds.width * CGFloat(self.images.count)
+        
+        if totalCellsHeight < inset {
+            inset -= totalCellsHeight
+        }
+        self.tileListTable.contentInset = UIEdgeInsets(top: inset/2, left: 0, bottom: inset/2, right: 0)
     }
     
     private func setUpActionList() {
@@ -189,7 +203,9 @@ extension FLViewerController : UITableViewDelegate {
         }
         if let cell = self.tileListTable.cellForRow(at: new) as? FLTileListCell {
             cell.setSelected(true)
+            self.tileListTable.scrollToRow(at: new, at: .middle, animated: true)
         }
+        
     }
 }
 

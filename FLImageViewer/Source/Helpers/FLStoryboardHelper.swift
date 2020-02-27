@@ -9,9 +9,37 @@
 
 import UIKit
 
-let FLBundle: Bundle = {
-    return Bundle(for: FLImageViewer.self)
-}()
+//let FLBundle: Bundle = {
+//    return Bundle(for: FLImageViewer.self)
+//}()
+
+enum BundleManager {
+    
+    case forSource, forAssets, forResources
+    
+    var bundle : Bundle {
+        let frameworkBundle = Bundle(for: FLImageViewer.self)
+        switch self {
+        case .forSource, .forResources:
+            return frameworkBundle
+        case .forAssets:
+            guard let resourceUrl = frameworkBundle.resourceURL,
+                let assetsBundle = Bundle(url: resourceUrl.appendingPathComponent(self.bundleName)) else {
+                    return frameworkBundle
+            }
+            return assetsBundle
+        }
+    }
+    
+    var bundleName : String {
+        switch self {
+        case .forSource, .forResources:
+            return "FLImageViewer.bundle"
+        case .forAssets:
+            return "FLImageViewerResources.bundle"
+        }
+    }
+}
 
 enum FLViewControllers {
     
@@ -25,7 +53,7 @@ enum FLViewControllers {
     }
     
     private var storyboard: UIStoryboard {
-        return UIStoryboard(name: self.storyboardName, bundle: FLBundle)
+        return UIStoryboard(name: self.storyboardName, bundle: BundleManager.forSource.bundle)
     }
     
     private var storyboardId: String {

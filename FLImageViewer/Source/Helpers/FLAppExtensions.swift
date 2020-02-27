@@ -17,7 +17,7 @@ extension String {
 }
 extension UIView {
     func viewFromXib() -> UIView? {
-        return FLBundle.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)?.first as? UIView
+        return BundleManager.forSource.bundle.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)?.first as? UIView
     }
 }
 

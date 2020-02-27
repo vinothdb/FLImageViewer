@@ -26,21 +26,18 @@ class ViewController: UIViewController {
         
         if #available(iOS 13.0, *) {
             viewer.addAction(image: UIImage(systemName: "xmark.circle"), alignment: .topLeft, action: { _,_ in
-                viewer.viewController?.dismiss(animated: true, completion: nil)
+                viewer.viewController.dismiss(animated: true, completion: nil)
             })
         }
 
         viewer.addAction(title: "Done", alignment: .topRight, action: { _,_ in
-            viewer.viewController?.dismiss(animated: true, completion: nil)
+            viewer.viewController.dismiss(animated: true, completion: nil)
         })
         
         viewer.addDeleteAction()
         
-        guard let imageViewController = viewer.viewController else {
-            return
-        }
-        imageViewController.modalPresentationStyle = .fullScreen
-        self.present(imageViewController, animated: true, completion: nil)
+//        viewer.viewController.modalPresentationStyle = .fullScreen
+        self.present(viewer.viewController, animated: true, completion: nil)
     }
 }
 

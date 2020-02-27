@@ -49,14 +49,33 @@ class FLImage {
 
 public class FLImageViewer {
 
-    private var images: [FLImage]
-    private var config : FLImageViewerConfig
-    private var actions : [(button:FLButton, align:Alignment)] = []
+    private var images: [FLImage] {
+        didSet {
+            self.imageViewerController.images = self.images
+        }
+    }
+    private var config : FLImageViewerConfig {
+        didSet {
+            self.imageViewerController.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
+        }
+    }
+    private var actions : [(button:FLButton, align:Alignment)] = [] {
+        didSet {
+            self.imageViewerController.actions = self.actions
+        }
+    }
     
     private var deleteButton: FLButton?
     
     private lazy var imageViewerController: FLViewerController = {
-        return FLViewControllers.ImageViewer.instantiate()!
+        guard let viewcontroller: FLViewerController = FLViewControllers.ImageViewer.instantiate() else {
+            fatalError("FLImageViewer: Could not instantiate ViewController")
+        }
+        viewcontroller.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
+        viewcontroller.images = self.images
+        viewcontroller.actions = self.actions
+        
+        return viewcontroller
     }()
     
     public init(config: FLImageViewerConfig) {
@@ -73,13 +92,10 @@ public class FLImageViewer {
 //MARK:- Public Actions
 public extension FLImageViewer {
     
-    var viewController : UIViewController? {
-        
-        self.imageViewerController.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
-        self.imageViewerController.images = self.images
-        self.imageViewerController.actions = self.actions
-        
-        return self.imageViewerController
+    var viewController : UIViewController {
+        get {
+            return self.imageViewerController
+        }
     }
     
     /// Appends image to the view

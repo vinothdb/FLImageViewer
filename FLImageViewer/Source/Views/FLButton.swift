@@ -12,8 +12,6 @@ class FLButton : UIButton {
     
     var action : (()->Void)? = nil
     
-    
-    
     class func button(title: String? = nil,
                       icon: UIImage? = nil,
                       backgroundColor: UIColor = .clear,
