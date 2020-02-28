@@ -16,21 +16,27 @@ class FLButton : UIButton {
                       icon: UIImage? = nil,
                       textColor: UIColor? = nil,
                       backgroundColor: UIColor = .clear,
-                      cornerRadius: CGFloat = 0,
+                      width: CGFloat? = nil,
+                      cornerRadius: CornerRadius? = nil,
+                      contentMode: UIView.ContentMode = .scaleAspectFit,
                       action: @escaping (()-> Void)) -> FLButton {
         
         let button = FLButton(type: .custom)
-        let buttonWidth = title != nil ? FLSizeConstants.actionTitle : FLSizeConstants.action
+        let buttonWidth = width ?? (title != nil ? FLSizeConstants.actionTitle : FLSizeConstants.action)
         
         button.translatesAutoresizingMaskIntoConstraints = false
     
         button.backgroundColor = backgroundColor
         button.tintColor = textColor ?? FLAppColor.content
-        button.contentMode = .scaleAspectFit
         
-        if cornerRadius != 0 {
+        if let cornerRadius = cornerRadius {
             button.layer.masksToBounds = true
-            button.layer.cornerRadius = cornerRadius
+            switch cornerRadius {
+            case .circle:
+                button.layer.cornerRadius = buttonWidth/2
+            case .custom(let radius):
+                button.layer.cornerRadius = radius
+            }
         }
         
         if let titleText = title {
@@ -43,6 +49,7 @@ class FLButton : UIButton {
         }
         if let image = icon {
             button.setImage(image, for: .normal)
+            button.imageView?.contentMode = .scaleAspectFill
             button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         }
         button.action = action

@@ -8,6 +8,10 @@
 
 import UIKit
 
+public enum CornerRadius {
+    case circle, custom(CGFloat)
+}
+
 struct FLSizeConstants {
     static let action: CGFloat = 30
     static let actionTitle: CGFloat = 60

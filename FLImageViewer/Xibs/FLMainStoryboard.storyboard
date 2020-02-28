@@ -48,7 +48,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDM-vk-REI">
                                 <rect key="frame" x="-142" y="241" width="698" height="414"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-BX-Iy4">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-BX-Iy4">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="414"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,7 +57,7 @@
                                         </constraints>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Dh-kh-Ivg">
-                                            <rect key="frame" x="0.0" y="99.5" width="80" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="58.5" width="80" height="0.0"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -66,24 +66,24 @@
                                         </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FLTileListCellId" id="I1R-eN-pO0" customClass="FLTileListCell" customModule="FLImageViewer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="80" height="43.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="80" height="2.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I1R-eN-pO0" id="x0C-Lv-0jP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="2.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwM-8k-0rd" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
+                                                            <rect key="frame" x="1" y="1" width="78" height="0.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="WwM-8k-0rd" firstAttribute="top" secondItem="x0C-Lv-0jP" secondAttribute="top" id="LrY-7i-9BI"/>
-                                                        <constraint firstItem="WwM-8k-0rd" firstAttribute="leading" secondItem="x0C-Lv-0jP" secondAttribute="leading" id="ZOa-yB-8Sx"/>
-                                                        <constraint firstAttribute="trailing" secondItem="WwM-8k-0rd" secondAttribute="trailing" id="ehc-Ch-RyE"/>
-                                                        <constraint firstAttribute="bottom" secondItem="WwM-8k-0rd" secondAttribute="bottom" id="uEP-LI-PNY"/>
+                                                        <constraint firstItem="WwM-8k-0rd" firstAttribute="top" secondItem="x0C-Lv-0jP" secondAttribute="top" constant="1" id="LrY-7i-9BI"/>
+                                                        <constraint firstItem="WwM-8k-0rd" firstAttribute="leading" secondItem="x0C-Lv-0jP" secondAttribute="leading" constant="1" id="ZOa-yB-8Sx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="WwM-8k-0rd" secondAttribute="trailing" constant="1" id="ehc-Ch-RyE"/>
+                                                        <constraint firstAttribute="bottom" secondItem="WwM-8k-0rd" secondAttribute="bottom" constant="1" id="uEP-LI-PNY"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

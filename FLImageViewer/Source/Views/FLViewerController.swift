@@ -53,6 +53,7 @@ class FLViewerController: UIViewController {
             
             let cell : FLViewerTableCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLViewerTableCellId")
             cell.fl_imageview.image = self.images[indexPath.row].image
+            cell.fl_imageview.resetZoom()
             
             return cell
         }
@@ -157,7 +158,7 @@ class FLViewerController: UIViewController {
         }
         switch (self.actionsAtTopStack.subviews.count==1, self.actionsAtBottonStack.subviews.count==1) {
         case (true, true):
-            self.imageStackHeightConstraint.constant += FLSizeConstants.action*2 //self.view.bounds.height*(1-self.imageStackHeightConstraint.multiplier)
+            self.imageStackHeightConstraint.constant += FLSizeConstants.action*2
         case (false, true):
             self.imageStackHeightConstraint.constant += FLSizeConstants.action
             self.centerAlignImageStackConstraint.constant = FLSizeConstants.action/2
@@ -166,7 +167,6 @@ class FLViewerController: UIViewController {
             self.centerAlignImageStackConstraint.constant = -FLSizeConstants.action/2
         case (false, false): break
         }
-        self.view.layoutIfNeeded()
     }
 }
 

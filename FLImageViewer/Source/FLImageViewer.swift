@@ -141,7 +141,9 @@ public extension FLImageViewer {
                          alignment: Alignment = .topRight,
                          textColor: UIColor? = nil,
                          backgroundColor: UIColor = .clear,
-                         cornerRadius: CGFloat = 0,
+                         width: CGFloat? = nil,
+                         cornerRadius: CornerRadius? = nil,
+                         contentMode: UIView.ContentMode = .scaleAspectFit,
                          completion: ((_ deletedIndex: Int)-> Void)? = nil) {
         
         let image = (title == nil && image == nil) ? UIImage.systemImage("trash") : image
@@ -170,10 +172,13 @@ public extension FLImageViewer {
     /// Adds action button to view.
     /// - Parameters:
     ///   - title: Text to be displayed for action button. Defaults to nil.
-    ///   - image: Icon for action button. Defaults to nil
+    ///   - image: Icon to use for action button. Defaults to nil
     ///   - alignment: Alignment for action button.
-    ///   - backgroundColor: Action button backgroundColor. Defaults to clear colour
-    ///   - cornerRadius: Action button corner radius. Defaults to 0
+    ///   - textColor: Will be set as both title text and tint color
+    ///   - backgroundColor: BackgroundColor to use for action button. Defaults to clear colour
+    ///   - width: Action button width
+    ///   - cornerRadius: Action button corner radius
+    ///   - contentMode: Action button content mode. Same is set to button's imageView, incase if image passed.
     ///   - action: Block to be executed when action button is tapped
     /// - Note:- List of actions will be sorted in the order it is added
     func addAction(title: String? = nil,
@@ -181,7 +186,9 @@ public extension FLImageViewer {
                    alignment: Alignment,
                    textColor: UIColor? = nil,
                    backgroundColor: UIColor = .clear,
-                   cornerRadius: CGFloat = 0,
+                   width: CGFloat? = nil,
+                   cornerRadius: CornerRadius? = nil,
+                   contentMode: UIView.ContentMode = .scaleAspectFit,
                    action: @escaping ((_ images: [UIImage], _ currentImageIndex: Int)-> Void)) {
         
         let action = FLButton.button(title: title,

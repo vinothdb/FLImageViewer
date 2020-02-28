@@ -25,13 +25,11 @@ class ViewController: UIViewController {
         let viewer = FLImageViewer(config: config)
         
         if #available(iOS 13.0, *) {
-            viewer.addAction(image: UIImage(systemName: "xmark.circle"), alignment: .topLeft, action: { _,_ in
-                viewer.viewController.dismiss(animated: true, completion: nil)
-            })
             viewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft, action: { _,_ in
                 viewer.viewController.dismiss(animated: true, completion: nil)
             })
-            viewer.addAction(image: UIImage(systemName: "xmark.circle.fill"), alignment: .topLeft, action: { _,_ in
+        } else {
+            viewer.addAction(title: "Cancel", alignment: .topLeft, textColor: .black, action: { _,_ in
                 viewer.viewController.dismiss(animated: true, completion: nil)
             })
         }

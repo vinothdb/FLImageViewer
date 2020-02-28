@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
             <connections>
+                <outlet property="containerScrollView" destination="IIE-Yi-hxa" id="m5d-bj-VwD"/>
                 <outlet property="imageView" destination="ABt-1f-Ehw" id="CAj-On-oM4"/>
             </connections>
         </placeholder>
@@ -17,10 +18,10 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="IIE-Yi-hxa">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="IIE-Yi-hxa">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ABt-1f-Ehw">
+                        <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ABt-1f-Ehw">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,9 +31,9 @@
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="bottom" secondItem="IIE-Yi-hxa" secondAttribute="bottom" id="68o-wS-rJY"/>
+                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="centerY" secondItem="IIE-Yi-hxa" secondAttribute="centerY" id="FHE-Yg-XNz"/>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="leading" secondItem="IIE-Yi-hxa" secondAttribute="leading" id="N7b-KX-yhg"/>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="centerX" secondItem="IIE-Yi-hxa" secondAttribute="centerX" id="dgG-Ic-dtY"/>
-                        <constraint firstItem="ABt-1f-Ehw" firstAttribute="bottom" secondItem="cXp-aK-ggO" secondAttribute="bottom" id="giD-4g-jHg"/>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="top" secondItem="IIE-Yi-hxa" secondAttribute="top" id="nuf-FL-YnJ"/>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="trailing" secondItem="IIE-Yi-hxa" secondAttribute="trailing" id="qFb-Kw-vB8"/>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="top" secondItem="IIE-Yi-hxa" secondAttribute="top" id="s0F-u5-lBB"/>
@@ -44,6 +45,9 @@
                             <exclude reference="nuf-FL-YnJ"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="fKS-7V-g4w"/>
+                    </connections>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
