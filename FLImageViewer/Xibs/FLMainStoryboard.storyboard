@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pQT-Lb-CHI">
-                                <rect key="frame" x="10" y="10" width="394" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pQT-Lb-CHI">
+                                <rect key="frame" x="10" y="59" width="394" height="30"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aG6-o2-bde">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -28,11 +28,25 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="qih-bV-adW"/>
+                                    <constraint firstAttribute="height" constant="30" id="qih-bV-adW"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Iqx-wS-vrH">
+                                <rect key="frame" x="10" y="817" width="394" height="30"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm7-M2-7al">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QxS-K4-ScL"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDM-vk-REI">
-                                <rect key="frame" x="-112" y="241" width="638" height="414"/>
+                                <rect key="frame" x="-142" y="241" width="698" height="414"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6lH-BX-Iy4">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="414"/>
@@ -81,20 +95,20 @@
                                         </prototypes>
                                     </tableView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TiE-2W-ygV">
-                                        <rect key="frame" x="90" y="0.0" width="548" height="414"/>
+                                        <rect key="frame" x="90" y="0.0" width="608" height="414"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FLViewerTableCellId" id="axs-Ke-pEF" customClass="FLViewerTableCell" customModule="FLImageViewer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="548" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="608" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="axs-Ke-pEF" id="kJn-jY-lzH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="548" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="608" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7K-gc-3lZ" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="548" height="44"/>
+                                                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="m7K-gc-3lZ" customClass="FLImageView" customModule="FLImageViewer" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="608" height="44"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
@@ -119,19 +133,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iqx-wS-vrH">
-                                <rect key="frame" x="10" y="836" width="394" height="50"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bm7-M2-7al">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="QxS-K4-ScL"/>
-                                </constraints>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,9 +142,9 @@
                             <constraint firstItem="Iqx-wS-vrH" firstAttribute="leading" secondItem="ck0-2R-OcP" secondAttribute="leading" constant="10" id="PbO-ZP-EV9"/>
                             <constraint firstItem="Iqx-wS-vrH" firstAttribute="trailing" secondItem="ck0-2R-OcP" secondAttribute="trailing" constant="-10" id="Q1i-Tk-lrl"/>
                             <constraint firstItem="qDM-vk-REI" firstAttribute="centerX" secondItem="Fy2-67-LcV" secondAttribute="centerX" id="aGw-ip-rcI"/>
-                            <constraint firstItem="qDM-vk-REI" firstAttribute="width" secondItem="ck0-2R-OcP" secondAttribute="height" constant="-180" id="b7x-BD-Ec3"/>
-                            <constraint firstItem="pQT-Lb-CHI" firstAttribute="top" secondItem="Fy2-67-LcV" secondAttribute="top" constant="10" id="mYQ-io-ImH"/>
-                            <constraint firstAttribute="bottom" secondItem="Iqx-wS-vrH" secondAttribute="bottom" constant="10" id="qzg-0B-Qtv"/>
+                            <constraint firstItem="qDM-vk-REI" firstAttribute="width" secondItem="ck0-2R-OcP" secondAttribute="height" constant="-120" id="b7x-BD-Ec3"/>
+                            <constraint firstItem="pQT-Lb-CHI" firstAttribute="top" secondItem="ck0-2R-OcP" secondAttribute="top" constant="15" id="mYQ-io-ImH"/>
+                            <constraint firstItem="ck0-2R-OcP" firstAttribute="bottom" secondItem="Iqx-wS-vrH" secondAttribute="bottom" constant="15" id="qzg-0B-Qtv"/>
                             <constraint firstItem="pQT-Lb-CHI" firstAttribute="leading" secondItem="ck0-2R-OcP" secondAttribute="leading" constant="10" id="web-rB-p9k"/>
                             <constraint firstItem="pQT-Lb-CHI" firstAttribute="trailing" secondItem="ck0-2R-OcP" secondAttribute="trailing" constant="-10" id="wwc-Ah-dqf"/>
                         </constraints>
@@ -153,7 +154,9 @@
                         <outlet property="actionsAtBottonStack" destination="Iqx-wS-vrH" id="W8l-98-Ddi"/>
                         <outlet property="actionsAtTopStack" destination="pQT-Lb-CHI" id="dkG-nZ-wN2"/>
                         <outlet property="buttomActionStackDummyView" destination="bm7-M2-7al" id="tFU-4G-nlA"/>
+                        <outlet property="centerAlignImageStackConstraint" destination="8ya-dA-Ika" id="ewm-Li-eFm"/>
                         <outlet property="containerView" destination="qDM-vk-REI" id="8Qg-6o-aL0"/>
+                        <outlet property="imageStackHeightConstraint" destination="b7x-BD-Ec3" id="FE9-CS-Ua1"/>
                         <outlet property="tileListTable" destination="6lH-BX-Iy4" id="Efx-xX-kpB"/>
                         <outlet property="tileListWidthConstraint" destination="qfV-mo-gNJ" id="B9Q-Tz-UOl"/>
                         <outlet property="topActionStackDummyView" destination="aG6-o2-bde" id="Lkf-Ow-EN9"/>

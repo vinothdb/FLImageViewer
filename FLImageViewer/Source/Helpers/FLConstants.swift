@@ -8,14 +8,16 @@
 
 import UIKit
 
-let FLSizeForActionWithIcon: CGFloat = 30
-let FLSizeForActionWithTitle: CGFloat = 60
+struct FLSizeConstants {
+    static let action: CGFloat = 30
+    static let actionTitle: CGFloat = 60
+}
 
 struct FLAppColor {
     
     static var bg : UIColor {
         if #available(iOS 11.0, *) {
-            return UIColor(named:"bg", in: BundleManager.forAssets.bundle, compatibleWith: nil) ?? #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+            return UIColor(named:"bg", in: BundleManager.assets.bundle, compatibleWith: nil) ?? #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         } else {
             return #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         }
@@ -23,7 +25,7 @@ struct FLAppColor {
     
     static var content : UIColor {
         if #available(iOS 11.0, *) {
-            return UIColor(named:"content", in: BundleManager.forAssets.bundle, compatibleWith: nil) ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            return UIColor(named:"content", in: BundleManager.assets.bundle, compatibleWith: nil) ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         } else {
             return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         }

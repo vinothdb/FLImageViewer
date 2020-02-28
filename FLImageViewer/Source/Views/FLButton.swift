@@ -20,13 +20,13 @@ class FLButton : UIButton {
                       action: @escaping (()-> Void)) -> FLButton {
         
         let button = FLButton(type: .custom)
-        let buttonWidth = title != nil ? FLSizeForActionWithTitle : FLSizeForActionWithIcon
+        let buttonWidth = title != nil ? FLSizeConstants.actionTitle : FLSizeConstants.action
         
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addConstraint(button.widthAnchor.constraint(lessThanOrEqualToConstant: buttonWidth))
     
         button.backgroundColor = backgroundColor
         button.tintColor = textColor ?? FLAppColor.content
+        button.contentMode = .scaleAspectFit
         
         if cornerRadius != 0 {
             button.layer.masksToBounds = true
@@ -39,9 +39,11 @@ class FLButton : UIButton {
             button.sizeToFit()
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.titleLabel?.minimumScaleFactor = 0.7
+            button.widthAnchor.constraint(lessThanOrEqualToConstant: buttonWidth).isActive = true
         }
         if let image = icon {
             button.setImage(image, for: .normal)
+            button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         }
         button.action = action
         

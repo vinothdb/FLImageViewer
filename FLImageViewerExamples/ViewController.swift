@@ -28,6 +28,12 @@ class ViewController: UIViewController {
             viewer.addAction(image: UIImage(systemName: "xmark.circle"), alignment: .topLeft, action: { _,_ in
                 viewer.viewController.dismiss(animated: true, completion: nil)
             })
+            viewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft, action: { _,_ in
+                viewer.viewController.dismiss(animated: true, completion: nil)
+            })
+            viewer.addAction(image: UIImage(systemName: "xmark.circle.fill"), alignment: .topLeft, action: { _,_ in
+                viewer.viewController.dismiss(animated: true, completion: nil)
+            })
         }
 
         viewer.addAction(title: "Done",alignment: .topRight, textColor: .blue, action: { _,_ in
