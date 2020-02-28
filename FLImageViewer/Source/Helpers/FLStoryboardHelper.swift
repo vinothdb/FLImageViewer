@@ -15,14 +15,14 @@ import UIKit
 
 enum BundleManager {
     
-    case forSource, forAssets, forResources
+    case source, assets, resources
     
     var bundle : Bundle {
         let frameworkBundle = Bundle(for: FLImageViewer.self)
         switch self {
-        case .forSource, .forResources:
+        case .source, .resources:
             return frameworkBundle
-        case .forAssets:
+        case .assets:
             guard let resourceUrl = frameworkBundle.resourceURL,
                 let assetsBundle = Bundle(url: resourceUrl.appendingPathComponent(self.bundleName)) else {
                     return frameworkBundle
@@ -33,9 +33,9 @@ enum BundleManager {
     
     var bundleName : String {
         switch self {
-        case .forSource, .forResources:
+        case .source, .resources:
             return "FLImageViewer.bundle"
-        case .forAssets:
+        case .assets:
             return "FLImageViewerResources.bundle"
         }
     }
@@ -53,7 +53,7 @@ enum FLViewControllers {
     }
     
     private var storyboard: UIStoryboard {
-        return UIStoryboard(name: self.storyboardName, bundle: BundleManager.forSource.bundle)
+        return UIStoryboard(name: self.storyboardName, bundle: BundleManager.source.bundle)
     }
     
     private var storyboardId: String {

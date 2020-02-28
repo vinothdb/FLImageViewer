@@ -12,6 +12,7 @@ class FLImageView : UIView {
     
 //    @IBOutlet var viewFromXib: UIView!
     @IBOutlet private weak var imageView: UIImageView?
+    @IBOutlet weak var containerScrollView: UIScrollView!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -20,18 +21,16 @@ class FLImageView : UIView {
         }
         self.addSubview(view)
         
-        var constraints : [NSLayoutConstraint] = []
-        constraints.append(view.topAnchor.constraint(equalTo: self.topAnchor))
-        constraints.append(view.bottomAnchor.constraint(equalTo: self.bottomAnchor))
-        constraints.append(view.leadingAnchor.constraint(equalTo: self.leadingAnchor))
-        constraints.append(view.trailingAnchor.constraint(equalTo: self.trailingAnchor))
-        
-        self.addConstraints(constraints)
+        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
     
     var image : UIImage? {
         didSet {
             self.imageView?.image = self.image
+           
         }
     }
     
@@ -43,5 +42,22 @@ class FLImageView : UIView {
             super.contentMode = value
             self.imageView?.contentMode = self.contentMode
         }
+    }
+    
+    func disableZoom() {
+        self.containerScrollView.isUserInteractionEnabled = false
+    }
+    
+    func resetZoom() {
+        self.containerScrollView.zoomScale = 1
+    }
+}
+
+extension FLImageView: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        
     }
 }

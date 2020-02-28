@@ -21,9 +21,18 @@ class FLViewerController: UIViewController {
     
     @IBOutlet private weak var tileListWidthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var imageStackHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var centerAlignImageStackConstraint: NSLayoutConstraint!
     var images: [FLImage] = []
     var tileCellSize: CGFloat = 0
-    var actions : [(button:FLButton, align:Alignment)] = []
+    var actions : [(button:FLButton, align:Alignment)] = [] {
+        didSet {
+            guard self.isViewLoaded else {
+                return
+            }
+            self.setUpActionList()
+        }
+    }
     
     private var showTileList : Bool {
         return tileCellSize != 0
@@ -44,6 +53,7 @@ class FLViewerController: UIViewController {
             
             let cell : FLViewerTableCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLViewerTableCellId")
             cell.fl_imageview.image = self.images[indexPath.row].image
+            cell.fl_imageview.resetZoom()
             
             return cell
         }
@@ -145,6 +155,17 @@ class FLViewerController: UIViewController {
             case .bottomRight:
                 self.actionsAtBottonStack.insertArrangedSubview(action.button, at: bottomActionStackDummyViewIndex+1)
             }
+        }
+        switch (self.actionsAtTopStack.subviews.count==1, self.actionsAtBottonStack.subviews.count==1) {
+        case (true, true):
+            self.imageStackHeightConstraint.constant += FLSizeConstants.action*2
+        case (false, true):
+            self.imageStackHeightConstraint.constant += FLSizeConstants.action
+            self.centerAlignImageStackConstraint.constant = FLSizeConstants.action/2
+        case (true, false):
+            self.imageStackHeightConstraint.constant += FLSizeConstants.action
+            self.centerAlignImageStackConstraint.constant = -FLSizeConstants.action/2
+        case (false, false): break
         }
     }
 }

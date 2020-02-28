@@ -17,7 +17,7 @@ extension String {
 }
 extension UIView {
     func viewFromXib() -> UIView? {
-        return BundleManager.forSource.bundle.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)?.first as? UIView
+        return BundleManager.source.bundle.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)?.first as? UIView
     }
 }
 
@@ -27,6 +27,21 @@ extension UIImage {
         guard #available(iOS 13, *) else { return nil }
         
         return UIImage(systemName: name)
+    }
+    
+    func resizedImage(toMax width:CGFloat, height:CGFloat) -> UIImage? {
+        let oldWidth = self.size.width
+        let oldHeight = self.size.height
+            
+        let scaleFactor = (oldWidth > oldHeight) ? width/oldWidth : height/oldHeight
+
+        let newSize = CGSize(width: oldWidth*scaleFactor, height: oldHeight*scaleFactor)
+        
+        UIGraphicsBeginImageContext(newSize)
+        self.draw(in: CGRect(origin: .zero, size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
 
