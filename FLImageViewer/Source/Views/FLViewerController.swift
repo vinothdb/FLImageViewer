@@ -23,19 +23,20 @@ class FLViewerController: UIViewController {
     
     @IBOutlet weak var imageStackHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var centerAlignImageStackConstraint: NSLayoutConstraint!
-    var images: [FLImage] = []
-    var tileCellSize: CGFloat = 0
-    var actions : [(button:FLButton, align:Alignment)] = [] {
-        didSet {
-            guard self.isViewLoaded else {
-                return
-            }
-            self.setUpActionList()
-        }
-    }
+    
+    
+    weak var delegate : FLDataSource?
     
     private var showTileList : Bool {
-        return tileCellSize != 0
+        return self.delegate?.fl_shouldShowTileList() ?? false
+    }
+    
+    private var images : [FLImage] {
+        return self.delegate?.fl_images() ?? []
+    }
+    
+    private var actions : [(button: FLButton, align: FLAlignment)] {
+        return self.delegate?.fl_actions() ?? []
     }
     
     private var topActionStackDummyViewIndex = 0
@@ -47,9 +48,12 @@ class FLViewerController: UIViewController {
         }
     }
     
-    @available(iOS 13.0, *)
-    private lazy var viewerTableDatasource: FLImageDataSource = {
-        FLImageDataSource(tableView: self.viewerTable) { (table, indexPath, _) in
+    private weak var viewerTableDatasource: FLImageDataSource?
+    
+    private weak var tileListTableDatasource: FLImageDataSource?
+    
+    private func setUpDataSource() {
+        self.viewerTableDatasource = FLImageDataSource(tableView: self.viewerTable) { (table, indexPath, _) in
             
             let cell : FLViewerTableCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLViewerTableCellId")
             cell.fl_imageview.image = self.images[indexPath.row].image
@@ -57,11 +61,8 @@ class FLViewerController: UIViewController {
             
             return cell
         }
-    }()
-    
-    @available(iOS 13.0, *)
-    private lazy var tileListTableDatasource: FLImageDataSource = {
-        FLImageDataSource(tableView: self.tileListTable) { (table, indexPath, _) in
+        
+        self.tileListTableDatasource = FLImageDataSource(tableView: self.tileListTable) { (table, indexPath, _) in
             
             let cell : FLTileListCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLTileListCellId")
             cell.fl_imageview.contentMode = .scaleToFill
@@ -70,7 +71,7 @@ class FLViewerController: UIViewController {
             
             return cell
         }
-    }()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +94,7 @@ class FLViewerController: UIViewController {
     private func reloadTables() {
        
         if #available(iOS 13, *) {
-            self.viewerTableDatasource.apply(images: self.images)
+            self.viewerTableDatasource?.apply(images: self.images)
         } else {
             self.viewerTable.dataSource = self
             self.viewerTable.reloadData()
@@ -115,10 +116,10 @@ class FLViewerController: UIViewController {
         }
         
         self.tileListTable.delegate = self
-        self.tileListWidthConstraint.constant = tileCellSize
+        self.tileListWidthConstraint.constant = self.delegate?.fl_tileViewSize() ?? 0
         
         if #available(iOS 13, *) {
-            self.tileListTableDatasource.apply(images: self.images) {
+            self.tileListTableDatasource?.apply(images: self.images) {
                 highlightCurrentCell()
             }
         } else {
@@ -167,6 +168,10 @@ class FLViewerController: UIViewController {
             self.centerAlignImageStackConstraint.constant = -FLSizeConstants.action/2
         case (false, false): break
         }
+    }
+    
+    deinit {
+        print("Deinit called on vc")
     }
 }
 
@@ -226,7 +231,6 @@ extension FLViewerController : UITableViewDelegate {
             cell.setSelected(true)
             self.tileListTable.scrollToRow(at: new, at: .middle, animated: true)
         }
-        
     }
 }
 
@@ -266,7 +270,6 @@ extension FLViewerController {
     }
     
     func reloadImages(images: [FLImage]) {
-        self.images = images
         self.reloadTables()
     }
 }

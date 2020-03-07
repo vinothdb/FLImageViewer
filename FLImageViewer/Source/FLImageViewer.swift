@@ -8,22 +8,21 @@
 
 import UIKit
 
-public enum Alignment {
+public enum FLAlignment {
     case topLeft, topRight, bottomLeft, bottomRight
 }
 
-public class FLImageViewerConfig {
+public struct FLImageViewerConfig {
     
     public var showImageTileList : Bool = true
     public var tileViewSize: CGFloat = 30
-    public var images : [UIImage]
     
-    public init(images: [UIImage]) {
-        self.images = images
+    public init() {
+        
     }
 }
 
-class FLImage {
+struct FLImage {
     
     let uniqueKey: String
     let image: UIImage
@@ -47,56 +46,98 @@ class FLImage {
     }
 }
 
-public class FLImageViewer {
+protocol FLDataSource : class {
+    
+    func fl_actions() -> [(button:FLButton, align:FLAlignment)]
+    func fl_images() -> [FLImage]
+    func fl_currentImageIndex() -> Int
+    
+    func fl_tileViewSize() -> CGFloat
+    func fl_shouldShowTileList() -> Bool
+}
 
-    private var images: [FLImage] {
-        didSet {
-            self.imageViewerController.images = self.images
-        }
-    }
-    private var config : FLImageViewerConfig {
-        didSet {
-            self.imageViewerController.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
-        }
-    }
-    private var actions : [(button:FLButton, align:Alignment)] = [] {
-        didSet {
-            self.imageViewerController.actions = self.actions
-        }
-    }
+public class FLImageViewer {
+    
+    private var images: [FLImage]
+//    {
+//        didSet {
+//            self.imageViewerController?.images = self.images
+//        }
+//    }
+    private var config : FLImageViewerConfig
+//    {
+//        didSet {
+//            self.imageViewerController?.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
+//        }
+//    }
+    private var actions : [(button:FLButton, align:FLAlignment)] = []
+//    {
+//        didSet {
+////            self.imageViewerController?.actions = self.actions
+//        }
+//    }
     
     private var deleteButton: FLButton?
     
-    private lazy var imageViewerController: FLViewerController = {
-        guard let viewcontroller: FLViewerController = FLViewControllers.ImageViewer.instantiate() else {
-            fatalError("FLImageViewer: Could not instantiate ViewController")
-        }
-        viewcontroller.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
-        viewcontroller.images = self.images
-        viewcontroller.actions = self.actions
-        
-        return viewcontroller
-    }()
+    private weak  var imageViewerController: FLViewerController?
+//        = { [weak self] in
+//        guard let viewcontroller: FLViewerController = FLViewControllers.ImageViewer.instantiate() else {
+//            fatalError("FLImageViewer: Could not instantiate ViewController")
+//        }
+//        viewcontroller.tileCellSize = self?.config.showImageTileList ?? true ? self?.config.tileViewSize ?? 30 : 0
+//        viewcontroller.images = self?.images ?? []
+//        viewcontroller.actions = self?.actions ?? []
+//
+//        return viewcontroller
+//    }()
     
-    public init(config: FLImageViewerConfig) {
+    private init(images:[UIImage] = [], config: FLImageViewerConfig = FLImageViewerConfig()) {
         self.config = config
-        self.images = FLImage.fl_images(images: config.images)
+        self.images = FLImage.fl_images(images: images)
+    }
+    
+    public static var shared = FLImageViewer()
+    
+    public func setImages(images:[UIImage]) {
+        self.images = FLImage.fl_images(images: images)
+    }
+    public func setConfig(config: FLImageViewerConfig) {
+        self.config = config
+    }
+    
+    public func presentView(onView: UIViewController) {
+        
+        self.imageViewerController = FLViewControllers.ImageViewer.instantiate()
+        self.imageViewerController?.delegate = self
+  
+        onView.present(imageViewerController!, animated: true, completion: nil)
+    }
+    
+    public func dismiss() {
+        imageViewerController?.dismiss(animated: true, completion: nil)
+        
+        imageViewerController = nil
+        self.images = []
     }
     
     private func reloadView() {
         self.deleteButton?.isHidden = self.images.count <= 1
-        self.imageViewerController.reloadImages(images: self.images)
+        self.imageViewerController?.reloadImages(images: self.images)
+    }
+    
+    deinit {
+        print("Deinit called on viewer")
     }
 }
 
 //MARK:- Public Actions
 public extension FLImageViewer {
     
-    var viewController : UIViewController {
-        get {
-            return self.imageViewerController
-        }
-    }
+//    var viewController : UIViewController {
+//        get {
+//            return self.imageViewerController
+//        }
+//    }
     
     /// Appends image to the view
     /// - Parameter images: Image to be appended
@@ -138,7 +179,7 @@ public extension FLImageViewer {
     /// - Note:- Last image cannot be deleted. Also Delete button will be sorted in the order the list of actions added.
     func addDeleteAction(title: String? = nil,
                          image: UIImage? = nil,
-                         alignment: Alignment = .topRight,
+                         alignment: FLAlignment = .topRight,
                          textColor: UIColor? = nil,
                          backgroundColor: UIColor = .clear,
                          width: CGFloat? = nil,
@@ -152,14 +193,14 @@ public extension FLImageViewer {
                                      icon: image,
                                      textColor: textColor,
                                      backgroundColor: backgroundColor,
-                                     cornerRadius: cornerRadius) {
+                                     cornerRadius: cornerRadius) { [weak self] in
                                         
-                                        guard self.images.count > 1, let currentIndex = self.imageViewerController.currentImageIndex() else {
+                                        guard !(self?.images.isEmpty ?? true), let currentIndex = self?.fl_currentImageIndex() else {
                                             return
                                         }
                                         
-                                        self.images.remove(at: currentIndex)
-                                        self.reloadView()
+                                        self?.images.remove(at: currentIndex)
+                                        self?.reloadView()
                                         completion?(currentIndex)
         }
         self.deleteButton = action
@@ -183,7 +224,7 @@ public extension FLImageViewer {
     /// - Note:- List of actions will be sorted in the order it is added
     func addAction(title: String? = nil,
                    image: UIImage? = nil,
-                   alignment: Alignment,
+                   alignment: FLAlignment,
                    textColor: UIColor? = nil,
                    backgroundColor: UIColor = .clear,
                    width: CGFloat? = nil,
@@ -195,14 +236,39 @@ public extension FLImageViewer {
                                      icon: image,
                                      textColor: textColor,
                                      backgroundColor: backgroundColor,
-                                     cornerRadius: cornerRadius) {
+                                     cornerRadius: cornerRadius) { [weak self] in
                                         
-                                        guard let currentIndex = self.imageViewerController.currentImageIndex() else {
+                                        guard let currentIndex = self?.fl_currentImageIndex() else {
                                             return
                                         }
-                                        action(FLImage.toUIImage(images: self.images), currentIndex)
+                                        action(FLImage.toUIImage(images: self?.images ?? []), currentIndex)
         }
         
         self.actions.append((action, alignment))
+    }
+}
+
+extension FLImageViewer: FLDataSource {
+    
+    func fl_tileViewSize() -> CGFloat {
+        return self.config.tileViewSize
+    }
+    
+    func fl_shouldShowTileList() -> Bool {
+        return self.config.showImageTileList
+    }
+    
+    
+    func fl_actions() -> [(button: FLButton, align: FLAlignment)] {
+        return self.actions
+    }
+    
+    func fl_images() -> [FLImage] {
+        return self.images
+    }
+    
+    func fl_currentImageIndex() -> Int {
+        return 0
+//        return self.imageViewerController?.viewerTable.indexPathForRow(at: self.viewerTable.contentOffset)?.row
     }
 }
