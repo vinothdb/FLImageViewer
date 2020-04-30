@@ -19,29 +19,29 @@ class ViewController: UIViewController {
     
     @IBAction func show() {
         
-        let config = FLImageViewerConfig(images: images)
-        config.showImageTileList = true
-        
-        let viewer = FLImageViewer(config: config)
-        
-        if #available(iOS 13.0, *) {
-            viewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft, action: { _,_ in
-                viewer.viewController.dismiss(animated: true, completion: nil)
-            })
-        } else {
-            viewer.addAction(title: "Cancel", alignment: .topLeft, textColor: .black, action: { _,_ in
-                viewer.viewController.dismiss(animated: true, completion: nil)
-            })
-        }
-
-        viewer.addAction(title: "Done",alignment: .topRight, textColor: .blue, action: { _,_ in
-            viewer.viewController.dismiss(animated: true, completion: nil)
-        })
-        
-        viewer.addDeleteAction()
-        
-//        viewer.viewController.modalPresentationStyle = .fullScreen
-        self.present(viewer.viewController, animated: true, completion: nil)
+//        let config = FLImageViewerConfig(images: images)
+//        config.showImageTileList = true
+//
+//        let viewer = FLImageViewer(config: config)
+//
+//        if #available(iOS 13.0, *) {
+//            viewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft, action: { _,_ in
+//                viewer.viewController.dismiss(animated: true, completion: nil)
+//            })
+//        } else {
+//            viewer.addAction(title: "Cancel", alignment: .topLeft, textColor: .black, action: { _,_ in
+//                viewer.viewController.dismiss(animated: true, completion: nil)
+//            })
+//        }
+//
+//        viewer.addAction(title: "Done",alignment: .topRight, textColor: .blue, action: { _,_ in
+//            viewer.viewController.dismiss(animated: true, completion: nil)
+//        })
+//
+//        viewer.addDeleteAction()
+//
+////        viewer.viewController.modalPresentationStyle = .fullScreen
+//        self.present(viewer.viewController, animated: true, completion: nil)
     }
 }
 
