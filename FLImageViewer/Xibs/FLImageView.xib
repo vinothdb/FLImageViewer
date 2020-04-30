@@ -38,8 +38,6 @@
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="trailing" secondItem="IIE-Yi-hxa" secondAttribute="trailing" id="qFb-Kw-vB8"/>
                         <constraint firstItem="ABt-1f-Ehw" firstAttribute="top" secondItem="IIE-Yi-hxa" secondAttribute="top" id="s0F-u5-lBB"/>
                     </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="1Lb-Ua-0xs"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="cXp-aK-ggO"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="nuf-FL-YnJ"/>
