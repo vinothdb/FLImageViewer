@@ -36,11 +36,11 @@ class FLImageView : UIView {
     
     override var contentMode: UIView.ContentMode {
         get {
-            return super.contentMode
+            return self.imageView?.contentMode ?? self.contentMode
         }
         set(value) {
             super.contentMode = value
-            self.imageView?.contentMode = self.contentMode
+            self.imageView?.contentMode = value
         }
     }
     

@@ -18,30 +18,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func show() {
+        let config = FLImageViewerConfig(images: images)
+        config.tileViewSize = 50
         
-//        let config = FLImageViewerConfig(images: images)
-//        config.showImageTileList = true
-//
-//        let viewer = FLImageViewer(config: config)
-//
-//        if #available(iOS 13.0, *) {
-//            viewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft, action: { _,_ in
-//                viewer.viewController.dismiss(animated: true, completion: nil)
-//            })
-//        } else {
-//            viewer.addAction(title: "Cancel", alignment: .topLeft, textColor: .black, action: { _,_ in
-//                viewer.viewController.dismiss(animated: true, completion: nil)
-//            })
-//        }
-//
-//        viewer.addAction(title: "Done",alignment: .topRight, textColor: .blue, action: { _,_ in
-//            viewer.viewController.dismiss(animated: true, completion: nil)
-//        })
-//
-//        viewer.addDeleteAction()
-//
-////        viewer.viewController.modalPresentationStyle = .fullScreen
-//        self.present(viewer.viewController, animated: true, completion: nil)
+        let imageViewer = FLImageViewer(config: config)
+        
+        if #available(iOS 13.0, *) {
+            imageViewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft) { (_, _) in
+                imageViewer.viewController.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        imageViewer.addDeleteAction()
+        
+        if #available(iOS 13.0, *) {
+            imageViewer.viewController.isModalInPresentation = true
+        }
+        self.present(imageViewer.viewController, animated: true, completion: nil)
     }
 }
 

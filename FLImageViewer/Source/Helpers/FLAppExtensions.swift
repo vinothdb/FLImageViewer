@@ -28,21 +28,6 @@ extension UIImage {
         
         return UIImage(systemName: name)
     }
-    
-    func resizedImage(toMax width:CGFloat, height:CGFloat) -> UIImage? {
-        let oldWidth = self.size.width
-        let oldHeight = self.size.height
-            
-        let scaleFactor = (oldWidth > oldHeight) ? width/oldWidth : height/oldHeight
-
-        let newSize = CGSize(width: oldWidth*scaleFactor, height: oldHeight*scaleFactor)
-        
-        UIGraphicsBeginImageContext(newSize)
-        self.draw(in: CGRect(origin: .zero, size: newSize))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
 }
 
 extension UITableView {

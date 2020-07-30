@@ -64,7 +64,7 @@ class FLViewerController: UIViewController {
         FLImageDataSource(tableView: self.tileListTable) { (table, indexPath, _) in
             
             let cell : FLTileListCell = .cell(forTable: table, indexPath: indexPath, identifier: "FLTileListCellId")
-            cell.fl_imageview.contentMode = .scaleToFill
+            cell.fl_imageview.contentMode = .scaleAspectFill
             cell.fl_imageview.image = self.images[indexPath.row].image
             cell.setSelected(indexPath == self.tileListSelectedIndexpath)
             
@@ -248,7 +248,7 @@ extension FLViewerController : UITableViewDataSource {
         
         case self.tileListTable:
             let cell : FLTileListCell = .cell(forTable: tableView, indexPath: indexPath, identifier: "FLTileListCellId")
-            cell.fl_imageview.contentMode = .scaleAspectFit
+            cell.fl_imageview.contentMode = .scaleAspectFill
             cell.fl_imageview.image = self.images[indexPath.row].image
             
             return cell
