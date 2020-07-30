@@ -248,7 +248,7 @@ extension FLViewerController : UITableViewDataSource {
         
         case self.tileListTable:
             let cell : FLTileListCell = .cell(forTable: tableView, indexPath: indexPath, identifier: "FLTileListCellId")
-            cell.fl_imageview.contentMode = .scaleToFill
+            cell.fl_imageview.contentMode = .scaleAspectFit
             cell.fl_imageview.image = self.images[indexPath.row].image
             
             return cell
