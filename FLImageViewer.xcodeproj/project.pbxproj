@@ -29,6 +29,9 @@
 		18A9089523FE751F0015AEA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A9089323FE751F0015AEA5 /* LaunchScreen.storyboard */; };
 		18A9089C23FE76980015AEA5 /* FLImageViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1891C3C723F586F9000AFA9F /* FLImageViewer.framework */; };
 		18A9089D23FE76980015AEA5 /* FLImageViewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1891C3C723F586F9000AFA9F /* FLImageViewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		80A3401D261B07A10010A491 /* FLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A3401C261B07A00010A491 /* FLTextView.swift */; };
+		80A34020261B26220010A491 /* FLCaptionedImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A3401F261B26210010A491 /* FLCaptionedImageViewController.swift */; };
+		80A34033261B5F460010A491 /* FLCaptionedImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A34032261B5F460010A491 /* FLCaptionedImageViewer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,9 @@
 		18A9089123FE751F0015AEA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18A9089423FE751F0015AEA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18A9089623FE751F0015AEA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80A3401C261B07A00010A491 /* FLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLTextView.swift; sourceTree = "<group>"; };
+		80A3401F261B26210010A491 /* FLCaptionedImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCaptionedImageViewController.swift; sourceTree = "<group>"; };
+		80A34032261B5F460010A491 /* FLCaptionedImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCaptionedImageViewer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +111,12 @@
 			isa = PBXGroup;
 			children = (
 				1891C3DC23F58BD2000AFA9F /* FLViewerController.swift */,
+				80A3401F261B26210010A491 /* FLCaptionedImageViewController.swift */,
 				184C5B8823F68BCC001327BA /* FLViewerTableCell.swift */,
 				18390B5B23FABD9000CE6EE0 /* FLTileListTableCell.swift */,
 				1833A87623FD1DFD00B26238 /* FLImageView.swift */,
 				18A153A123FD674900750905 /* FLButton.swift */,
+				80A3401C261B07A00010A491 /* FLTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				1891C3D323F587C9000AFA9F /* FLImageViewer.swift */,
+				80A34032261B5F460010A491 /* FLCaptionedImageViewer.swift */,
 				1833A87523FD1BEA00B26238 /* Views */,
 				18525BA223F6813C009140CC /* Helpers */,
 			);
@@ -314,6 +323,7 @@
 			files = (
 				1833A87723FD1DFD00B26238 /* FLImageView.swift in Sources */,
 				1891C3D423F587C9000AFA9F /* FLImageViewer.swift in Sources */,
+				80A34033261B5F460010A491 /* FLCaptionedImageViewer.swift in Sources */,
 				1891C3DD23F58BD2000AFA9F /* FLViewerController.swift in Sources */,
 				18525BA523F6816D009140CC /* FLStoryboardHelper.swift in Sources */,
 				184C5B8B23F6942B001327BA /* FLImageDataSource.swift in Sources */,
@@ -321,6 +331,8 @@
 				1891C3D623F5891A000AFA9F /* FLConstants.swift in Sources */,
 				184C5B8923F68BCC001327BA /* FLViewerTableCell.swift in Sources */,
 				184C5B8D23F69C1B001327BA /* FLAppExtensions.swift in Sources */,
+				80A3401D261B07A10010A491 /* FLTextView.swift in Sources */,
+				80A34020261B26220010A491 /* FLCaptionedImageViewController.swift in Sources */,
 				18A153A223FD674900750905 /* FLButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

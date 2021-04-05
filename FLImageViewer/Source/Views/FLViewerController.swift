@@ -16,16 +16,16 @@ class FLViewerController: UIViewController {
     @IBOutlet private weak var actionsAtBottonStack: UIStackView!
     @IBOutlet private weak var buttomActionStackDummyView: UIView!
     
-    @IBOutlet private weak var viewerTable: UITableView!
+    @IBOutlet weak var viewerTable: UITableView!
     @IBOutlet private weak var tileListTable: UITableView!
     
     @IBOutlet private weak var tileListWidthConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var imageStackHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var centerAlignImageStackConstraint: NSLayoutConstraint!
+	
     var images: [FLImage] = []
     var tileCellSize: CGFloat = 0
-    var actions : [(button:FLButton, align:Alignment)] = [] {
+    var actions: [(button:FLButton, align:Alignment)] = [] {
         didSet {
             guard self.isViewLoaded else {
                 return
@@ -71,6 +71,8 @@ class FLViewerController: UIViewController {
             return cell
         }
     }()
+	
+	weak var delegate: FLImageViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +92,7 @@ class FLViewerController: UIViewController {
         self.reloadTables()
     }
     
-    private func reloadTables() {
+    func reloadTables() {
        
         if #available(iOS 13, *) {
             self.viewerTableDatasource.apply(images: self.images)
@@ -142,6 +144,8 @@ class FLViewerController: UIViewController {
     }
     
     private func setUpActionList() {
+		self.topActionStackDummyViewIndex = 0
+		self.bottomActionStackDummyViewIndex = 0
         for action in self.actions {
             switch action.align {
             case .topLeft:
@@ -156,17 +160,17 @@ class FLViewerController: UIViewController {
                 self.actionsAtBottonStack.insertArrangedSubview(action.button, at: bottomActionStackDummyViewIndex+1)
             }
         }
-        switch (self.actionsAtTopStack.subviews.count==1, self.actionsAtBottonStack.subviews.count==1) {
-        case (true, true):
-            self.imageStackHeightConstraint.constant += FLSizeConstants.action*2
-        case (false, true):
-            self.imageStackHeightConstraint.constant += FLSizeConstants.action
-            self.centerAlignImageStackConstraint.constant = FLSizeConstants.action/2
-        case (true, false):
-            self.imageStackHeightConstraint.constant += FLSizeConstants.action
-            self.centerAlignImageStackConstraint.constant = -FLSizeConstants.action/2
-        case (false, false): break
-        }
+//        switch (self.actionsAtTopStack.subviews.count == 1, self.actionsAtBottonStack.subviews.count == 1) {
+//        case (true, true):
+//            self.imageStackHeightConstraint.constant += FLSizeConstants.action * 2
+//        case (false, true):
+//            self.imageStackHeightConstraint.constant += FLSizeConstants.action
+//            self.centerAlignImageStackConstraint.constant = FLSizeConstants.action / 2
+//        case (true, false):
+//            self.imageStackHeightConstraint.constant += FLSizeConstants.action
+//            self.centerAlignImageStackConstraint.constant = -FLSizeConstants.action / 2
+//        case (false, false): break
+//        }
     }
 }
 
@@ -222,6 +226,8 @@ extension FLViewerController : UITableViewDelegate {
         if let oldIndexPath = old, let prevCell = self.tileListTable.cellForRow(at: oldIndexPath) as? FLTileListCell {
             prevCell.setSelected(false)
         }
+		
+		// when tried to add more images, scroll the tile list table to last and selected the first image in image view the tile list is not scrolling to the first, as the cell is return nil
         if let cell = self.tileListTable.cellForRow(at: new) as? FLTileListCell {
             cell.setSelected(true)
             self.tileListTable.scrollToRow(at: new, at: .middle, animated: true)
@@ -259,10 +265,10 @@ extension FLViewerController : UITableViewDataSource {
 }
 
 
-extension FLViewerController {
-    
-    func currentImageIndex() -> Int? {
-        return self.viewerTable.indexPathForRow(at: self.viewerTable.contentOffset)?.row
+extension FLViewerController: FLImageViewProtocol {
+	
+    func currentImageIndex() -> Int {
+        return self.viewerTable.indexPathForRow(at: self.viewerTable.contentOffset)?.row ?? 0
     }
     
     func reloadImages(images: [FLImage]) {

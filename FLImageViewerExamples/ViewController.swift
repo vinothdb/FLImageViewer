@@ -21,15 +21,15 @@ class ViewController: UIViewController {
         let config = FLImageViewerConfig(images: images)
         config.tileViewSize = 50
         
-        let imageViewer = FLImageViewer(config: config)
-        
-        if #available(iOS 13.0, *) {
-            imageViewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft) { (_, _) in
-                imageViewer.viewController.dismiss(animated: true, completion: nil)
-            }
-        } else {
-            // Fallback on earlier versions
-        }
+		let imageViewer = FLCaptionedImageViewer(config: config)
+
+//        if #available(iOS 13.0, *) {
+//            imageViewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft) { (_, _) in
+//                imageViewer.viewController.dismiss(animated: true, completion: nil)
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//        }
         imageViewer.addDeleteAction()
         
         if #available(iOS 13.0, *) {

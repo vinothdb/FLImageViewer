@@ -23,7 +23,7 @@ public class FLImageViewerConfig {
     }
 }
 
-class FLImage {
+public class FLImage {
     
     let uniqueKey: String
     let image: UIImage
@@ -43,25 +43,41 @@ class FLImage {
     }
     
     static func toUIImage(images:[FLImage]) -> [UIImage] {
-        return images.map{ $0.image }
+        return images.map { $0.image }
     }
+}
+
+typealias FLAction = (button: FLButton, align: Alignment)
+
+protocol FLImageViewProtocol: UIViewController {
+	var delegate: FLImageViewDelegate? { get set }
+	var images: [FLImage] { get set }
+	var actions: [FLAction] { get set }
+	var tileCellSize: CGFloat { get set }
+	func reloadImages(images: [FLImage])
+	func currentImageIndex() -> Int
+}
+
+public protocol FLImageViewDelegate: AnyObject {
+	func didSelect(images: [FLImage])
 }
 
 public class FLImageViewer {
 
-    private var images: [FLImage] {
+    var images: [FLImage] {
         didSet {
-            self.imageViewerController.images = self.images
+            self.flImageViewController.images = self.images
         }
     }
-    private var config : FLImageViewerConfig {
+    var config: FLImageViewerConfig {
         didSet {
-            self.imageViewerController.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
+            self.flImageViewController.tileCellSize = self.config.showImageTileList ? self.config.tileViewSize : 0
         }
     }
-    private var actions : [(button:FLButton, align:Alignment)] = [] {
+	
+    var actions : [(button: FLButton, align: Alignment)] = [] {
         didSet {
-            self.imageViewerController.actions = self.actions
+            self.flImageViewController.actions = self.actions
         }
     }
     
@@ -77,24 +93,68 @@ public class FLImageViewer {
         
         return viewcontroller
     }()
+	
+	var flImageViewController: FLImageViewProtocol {
+		return imageViewerController
+	}
+	
+	public weak var delegate: FLImageViewDelegate? {
+		didSet {
+			flImageViewController.delegate = delegate
+		}
+	}
     
-    public init(config: FLImageViewerConfig) {
+	public init(config: FLImageViewerConfig) {
         self.config = config
         self.images = FLImage.fl_images(images: config.images)
     }
     
     private func reloadView() {
         self.deleteButton?.isHidden = self.images.count <= 1
-        self.imageViewerController.reloadImages(images: self.images)
+        self.flImageViewController.reloadImages(images: self.images)
     }
+	
+	/// Adds action button to view.
+	/// - Parameters:
+	///   - title: Text to be displayed for action button. Defaults to nil.
+	///   - image: Icon to use for action button. Defaults to nil
+	///   - alignment: Alignment for action button.
+	///   - textColor: Will be set as both title text and tint color
+	///   - backgroundColor: BackgroundColor to use for action button. Defaults to clear colour
+	///   - width: Action button width
+	///   - cornerRadius: Action button corner radius
+	///   - contentMode: Action button content mode. Same is set to button's imageView, incase if image passed.
+	///   - action: Block to be executed when action button is tapped
+	/// - Note:- List of actions will be sorted in the order it is added
+	public func addAction(title: String? = nil,
+				   image: UIImage? = nil,
+				   alignment: Alignment,
+				   textColor: UIColor? = nil,
+				   backgroundColor: UIColor = .clear,
+				   width: CGFloat? = nil,
+				   cornerRadius: CornerRadius? = nil,
+				   contentMode: UIView.ContentMode = .scaleAspectFit,
+				   action: @escaping ((_ images: [FLImage], _ currentImageIndex: Int)-> Void)) {
+		let action = FLButton.button(title: title,
+									 icon: image,
+									 textColor: textColor,
+									 backgroundColor: backgroundColor,
+									 cornerRadius: cornerRadius) {
+			
+			let currentIndex = self.flImageViewController.currentImageIndex()
+			action(self.images, currentIndex)
+		}
+		
+		self.actions.append((action, alignment))
+	}
 }
 
 //MARK:- Public Actions
 public extension FLImageViewer {
     
-    var viewController : UIViewController {
+    var viewController: UIViewController {
         get {
-            return self.imageViewerController
+            return self.flImageViewController
         }
     }
     
@@ -148,60 +208,22 @@ public extension FLImageViewer {
         
         let image = (title == nil && image == nil) ? UIImage.systemImage("trash") : image
         
-        let action = FLButton.button(title: title,
-                                     icon: image,
-                                     textColor: textColor,
-                                     backgroundColor: backgroundColor,
-                                     cornerRadius: cornerRadius) {
-                                        
-                                        guard self.images.count > 1, let currentIndex = self.imageViewerController.currentImageIndex() else {
-                                            return
-                                        }
-                                        
-                                        self.images.remove(at: currentIndex)
-                                        self.reloadView()
-                                        completion?(currentIndex)
-        }
+		let action = FLButton.button(title: title,
+									 icon: image,
+									 textColor: textColor,
+									 backgroundColor: backgroundColor,
+									 cornerRadius: cornerRadius) {
+			
+			guard self.images.count > 1 else {
+				return
+			}
+			let currentIndex = self.flImageViewController.currentImageIndex()
+			self.images.remove(at: currentIndex)
+			self.reloadView()
+			completion?(currentIndex)
+		}
         self.deleteButton = action
         self.deleteButton?.isHidden = self.images.count <= 1
-        
-        self.actions.append((action, alignment))
-    }
-    
-    
-    /// Adds action button to view.
-    /// - Parameters:
-    ///   - title: Text to be displayed for action button. Defaults to nil.
-    ///   - image: Icon to use for action button. Defaults to nil
-    ///   - alignment: Alignment for action button.
-    ///   - textColor: Will be set as both title text and tint color
-    ///   - backgroundColor: BackgroundColor to use for action button. Defaults to clear colour
-    ///   - width: Action button width
-    ///   - cornerRadius: Action button corner radius
-    ///   - contentMode: Action button content mode. Same is set to button's imageView, incase if image passed.
-    ///   - action: Block to be executed when action button is tapped
-    /// - Note:- List of actions will be sorted in the order it is added
-    func addAction(title: String? = nil,
-                   image: UIImage? = nil,
-                   alignment: Alignment,
-                   textColor: UIColor? = nil,
-                   backgroundColor: UIColor = .clear,
-                   width: CGFloat? = nil,
-                   cornerRadius: CornerRadius? = nil,
-                   contentMode: UIView.ContentMode = .scaleAspectFit,
-                   action: @escaping ((_ images: [UIImage], _ currentImageIndex: Int)-> Void)) {
-        
-        let action = FLButton.button(title: title,
-                                     icon: image,
-                                     textColor: textColor,
-                                     backgroundColor: backgroundColor,
-                                     cornerRadius: cornerRadius) {
-                                        
-                                        guard let currentIndex = self.imageViewerController.currentImageIndex() else {
-                                            return
-                                        }
-                                        action(FLImage.toUIImage(images: self.images), currentIndex)
-        }
         
         self.actions.append((action, alignment))
     }

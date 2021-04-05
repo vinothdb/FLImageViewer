@@ -8,58 +8,77 @@
 
 import UIKit
 
-class FLButton : UIButton {
+public class FLButton: UIButton {
     
-    var action : (()->Void)? = nil
+    var action: (()->Void)? = nil
     
-    class func button(title: String? = nil,
-                      icon: UIImage? = nil,
-                      textColor: UIColor? = nil,
-                      backgroundColor: UIColor = .clear,
-                      width: CGFloat? = nil,
-                      cornerRadius: CornerRadius? = nil,
-                      contentMode: UIView.ContentMode = .scaleAspectFit,
-                      action: @escaping (()-> Void)) -> FLButton {
-        
-        let button = FLButton(type: .custom)
-        let buttonWidth = width ?? (title != nil ? FLSizeConstants.actionTitle : FLSizeConstants.action)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-    
-        button.backgroundColor = backgroundColor
-        button.tintColor = textColor ?? FLAppColor.content
-        
-        if let cornerRadius = cornerRadius {
-            button.layer.masksToBounds = true
-            switch cornerRadius {
-            case .circle:
-                button.layer.cornerRadius = buttonWidth/2
-            case .custom(let radius):
-                button.layer.cornerRadius = radius
-            }
-        }
-        
-        if let titleText = title {
-            button.setTitle(titleText, for: .normal)
-            button.setTitleColor(textColor ?? FLAppColor.content, for: .normal)
-            button.sizeToFit()
-            button.titleLabel?.adjustsFontSizeToFitWidth = true
-            button.titleLabel?.minimumScaleFactor = 0.7
-            button.widthAnchor.constraint(lessThanOrEqualToConstant: buttonWidth).isActive = true
-        }
-        if let image = icon {
-            button.setImage(image, for: .normal)
-            button.imageView?.contentMode = .scaleAspectFill
-            button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
-        }
-        button.action = action
-        
-        button.addTarget(button, action: #selector(button.didButtonTapped), for: .touchUpInside)
-        
-        return button
-    }
-    
+	func configureButton(title: String? = nil,
+						 icon: UIImage? = nil,
+						 textColor: UIColor? = nil,
+						 backgroundColor: UIColor = .clear,
+						 width: CGFloat? = nil,
+						 cornerRadius: CornerRadius? = nil,
+						 contentMode: UIView.ContentMode = .scaleAspectFit) {
+		
+		let buttonWidth = width ?? (title != nil ? FLSizeConstants.actionTitle : FLSizeConstants.action)
+		translatesAutoresizingMaskIntoConstraints = false
+		self.backgroundColor = backgroundColor
+		tintColor = textColor ?? FLAppColor.content
+		
+		if let cornerRadius = cornerRadius {
+			layer.masksToBounds = true
+			switch cornerRadius {
+			case .circle:
+				layer.cornerRadius = buttonWidth / 2
+			case .custom(let radius):
+				layer.cornerRadius = radius
+			}
+		}
+		
+		if let titleText = title {
+			setTitle(titleText, for: .normal)
+			setTitleColor(textColor ?? FLAppColor.content, for: .normal)
+			sizeToFit()
+			titleLabel?.adjustsFontSizeToFitWidth = true
+			titleLabel?.minimumScaleFactor = 0.7
+			widthAnchor.constraint(lessThanOrEqualToConstant: buttonWidth).isActive = true
+		}
+		
+		if let image = icon {
+			setImage(image, for: .normal)
+			imageView?.contentMode = .scaleAspectFill
+			widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+		}
+	}
+	
     @objc func didButtonTapped() {
         self.action?()
     }
+}
+
+extension FLButton {
+	
+	public class func button(title: String? = nil,
+							 icon: UIImage? = nil,
+							 textColor: UIColor? = nil,
+							 backgroundColor: UIColor = .clear,
+							 width: CGFloat? = nil,
+							 cornerRadius: CornerRadius? = nil,
+							 contentMode: UIView.ContentMode = .scaleAspectFit,
+							 action: @escaping (()-> Void)) -> FLButton {
+		
+		let button = FLButton(type: .custom)
+		button.configureButton(title: title,
+							   icon: icon,
+							   textColor: textColor,
+							   backgroundColor: backgroundColor,
+							   width: width,
+							   cornerRadius: cornerRadius,
+							   contentMode: contentMode)
+		button.action = action
+		
+		button.addTarget(button, action: #selector(button.didButtonTapped), for: .touchUpInside)
+		
+		return button
+	}
 }
