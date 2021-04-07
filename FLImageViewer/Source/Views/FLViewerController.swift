@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FLViewControllerDelegate: AnyObject {
+	func didChangeSelectedImageIndex()
+}
+
 class FLViewerController: UIViewController {
 
     @IBOutlet private weak var containerView: UIStackView!
@@ -45,6 +49,9 @@ class FLViewerController: UIViewController {
         willSet(value) {
             self.updateTileListCellSelected(self.tileListSelectedIndexpath, new: value)
         }
+		didSet {
+			self.delegate?.didChangeSelectedImageIndex()
+		}
     }
     
     @available(iOS 13.0, *)
@@ -72,7 +79,8 @@ class FLViewerController: UIViewController {
         }
     }()
 	
-	weak var delegate: FLImageViewDelegate?
+	weak var interfaceDelegate: FLImageViewDelegate?
+	weak var delegate: FLViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -23,34 +23,10 @@ public class FLImageViewerConfig {
     }
 }
 
-public class FLImage {
-    
-    let uniqueKey: String
-    let image: UIImage
-    
-    init(image: UIImage) {
-        self.image = image
-        self.uniqueKey = String.random(length: 10)
-    }
-    
-    static func fl_images(images:[UIImage]) -> [FLImage] {
-        
-        var fl_images: [FLImage] = []
-        for image in images {
-            fl_images.append(FLImage(image: image))
-        }
-        return fl_images
-    }
-    
-    static func toUIImage(images:[FLImage]) -> [UIImage] {
-        return images.map { $0.image }
-    }
-}
-
 typealias FLAction = (button: FLButton, align: Alignment)
 
 protocol FLImageViewProtocol: UIViewController {
-	var delegate: FLImageViewDelegate? { get set }
+	var interfaceDelegate: FLImageViewDelegate? { get set }
 	var images: [FLImage] { get set }
 	var actions: [FLAction] { get set }
 	var tileCellSize: CGFloat { get set }
@@ -101,7 +77,7 @@ public class FLImageViewer {
 	
 	public weak var delegate: FLImageViewDelegate? {
 		didSet {
-			flImageViewController.delegate = delegate
+			flImageViewController.interfaceDelegate = delegate
 		}
 	}
     

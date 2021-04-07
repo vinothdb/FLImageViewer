@@ -32,6 +32,7 @@
 		80A3401D261B07A10010A491 /* FLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A3401C261B07A00010A491 /* FLTextView.swift */; };
 		80A34020261B26220010A491 /* FLCaptionedImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A3401F261B26210010A491 /* FLCaptionedImageViewController.swift */; };
 		80A34033261B5F460010A491 /* FLCaptionedImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A34032261B5F460010A491 /* FLCaptionedImageViewer.swift */; };
+		80A34037261DC5060010A491 /* FLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A34036261DC5060010A491 /* FLImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		80A3401C261B07A00010A491 /* FLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLTextView.swift; sourceTree = "<group>"; };
 		80A3401F261B26210010A491 /* FLCaptionedImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCaptionedImageViewController.swift; sourceTree = "<group>"; };
 		80A34032261B5F460010A491 /* FLCaptionedImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCaptionedImageViewer.swift; sourceTree = "<group>"; };
+		80A34036261DC5060010A491 /* FLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			children = (
 				1891C3D323F587C9000AFA9F /* FLImageViewer.swift */,
 				80A34032261B5F460010A491 /* FLCaptionedImageViewer.swift */,
+				80A34036261DC5060010A491 /* FLImage.swift */,
 				1833A87523FD1BEA00B26238 /* Views */,
 				18525BA223F6813C009140CC /* Helpers */,
 			);
@@ -322,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1833A87723FD1DFD00B26238 /* FLImageView.swift in Sources */,
+				80A34037261DC5060010A491 /* FLImage.swift in Sources */,
 				1891C3D423F587C9000AFA9F /* FLImageViewer.swift in Sources */,
 				80A34033261B5F460010A491 /* FLCaptionedImageViewer.swift in Sources */,
 				1891C3DD23F58BD2000AFA9F /* FLViewerController.swift in Sources */,

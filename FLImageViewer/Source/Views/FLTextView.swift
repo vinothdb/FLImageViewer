@@ -20,8 +20,26 @@ struct FLTextViewConfiguration {
 	var noOfLines: Int = 4
 }
 
+protocol FLTextViewDelegate: AnyObject {
+	func didChangeCaption(_ caption: String)
+}
+
 class FLTextView: UITextView {
 
+	override init(frame: CGRect, textContainer: NSTextContainer?) {
+		super.init(frame: frame, textContainer: textContainer)
+		setupView()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setupView()
+	}
+	
+	private func setupView() {
+		delegate = self
+	}
+	
 	lazy var heightContraint: NSLayoutConstraint = {
 			let constraint = self.heightAnchor.constraint(equalToConstant: width)
 			constraint.isActive = true
@@ -44,10 +62,14 @@ class FLTextView: UITextView {
 			heightContraint.constant = height
 		}
 	}
+	
+	weak var textViewDelegate: FLTextViewDelegate?
 }
 
 extension FLTextView: UITextViewDelegate {
-
+	func textViewDidChange(_ textView: UITextView) {
+		textViewDelegate?.didChangeCaption(self.text)
+	}
 }
 
 extension FLTextView {

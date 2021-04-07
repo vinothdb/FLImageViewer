@@ -19,8 +19,11 @@ class FLCaptionedImageViewController: UIViewController {
 		return containerView
 	}()
 	
-	lazy var imageViewVC: FLViewerController = FLViewControllers.ImageViewer.instantiate() as! FLViewerController
-	
+	lazy var imageViewVC: FLViewerController = {
+		let vc = FLViewControllers.ImageViewer.instantiate() as! FLViewerController
+		vc.delegate = self
+		return vc
+	}()
 	lazy var sendButton: FLButton = {
 		let button: FLButton = FLButton.button(title: "Send",
 											  icon: nil,
@@ -29,12 +32,16 @@ class FLCaptionedImageViewController: UIViewController {
 											  cornerRadius: .custom(25)) {
 			
 			let currentIndex = self.currentImageIndex()
-			self.delegate?.didSelect(images: self.images)
+			self.interfaceDelegate?.didSelect(images: self.images)
 		}
 		return button
 	}()
 	
-	lazy var captionTextView: FLTextView = FLTextView.create()
+	lazy var captionTextView: FLTextView = {
+		let captionView = FLTextView.create()
+		captionView.textViewDelegate = self
+		return captionView
+	}()
 	
 	lazy var toolbarStackView: UIStackView = {
 		let stackView = UIStackView(arrangedSubviews: [captionTextView, sendButton])
@@ -46,7 +53,7 @@ class FLCaptionedImageViewController: UIViewController {
 		return self.toolbarStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
 	}()
 	
-	weak var delegate: FLImageViewDelegate? 
+	weak var interfaceDelegate: FLImageViewDelegate? 
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +86,6 @@ class FLCaptionedImageViewController: UIViewController {
 	
 	}
 	
-	
 	func registerNotifications() {
 		NotificationCenter.default.addObserver(self,
 											   selector: #selector(keyboardWillShow(_:)),
@@ -97,7 +103,7 @@ class FLCaptionedImageViewController: UIViewController {
 	
 	@objc
 	func dismissKeyboard() {
-		view.endEditing(true)
+		captionTextView.resignFirstResponder()
 	}
 }
 
@@ -130,6 +136,9 @@ extension FLCaptionedImageViewController: FLImageViewProtocol {
 		}
 	}
 	
+	var currentImage: FLImage {
+		return images[currentImageIndex()]
+	}
 	
 	func currentImageIndex() -> Int {
 		guard let viewerTable = imageViewVC.viewerTable else { return 0 }
@@ -201,5 +210,19 @@ extension FLCaptionedImageViewController {
 	func keyboardWillDismiss(_ notification: Notification) {
 		toolbarItemBottomConstraint.constant = 0
 		self.view.layoutIfNeeded()
+	}
+}
+
+// MARK: - FLTextViewDelegate conformation
+extension FLCaptionedImageViewController: FLTextViewDelegate {
+	func didChangeCaption(_ caption: String) {
+		currentImage.caption = caption
+	}
+}
+
+// MARK: - FLViewControllerDelegate conformation
+extension FLCaptionedImageViewController: FLViewControllerDelegate {
+	func didChangeSelectedImageIndex() {
+		captionTextView.text = currentImage.caption ?? ""
 	}
 }

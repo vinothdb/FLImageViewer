@@ -44,7 +44,9 @@ class ViewController: UIViewController {
 
 extension ViewController: FLImageViewDelegate {
 	func didSelect(images: [FLImage]) {
-		print("selected images: \(images)")
+		images.forEach { (image) in
+			print(image.caption ?? "caption not present!!")
+		}
 	}
 	
 	func didTapCloseButton() {
