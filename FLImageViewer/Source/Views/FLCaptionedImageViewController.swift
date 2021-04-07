@@ -11,6 +11,7 @@ import UIKit
 class FLCaptionedImageViewController: UIViewController {
 	
 	let bgColor: UIColor = .white
+	let toolbarBgColor: UIColor = .white
 	
 	lazy var imageViewContainer: UIView = {
 		let containerView = UIView()
@@ -33,10 +34,16 @@ class FLCaptionedImageViewController: UIViewController {
 		return button
 	}()
 	
+	lazy var captionTextView: FLTextView = FLTextView.create()
+	
 	lazy var toolbarStackView: UIStackView = {
-		let stackView = UIStackView(arrangedSubviews: [FLTextView.create(), sendButton])
+		let stackView = UIStackView(arrangedSubviews: [captionTextView, sendButton])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		return stackView
+	}()
+	
+	lazy var toolbarItemBottomConstraint: NSLayoutConstraint = {
+		return self.toolbarStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
 	}()
 	
 	weak var delegate: FLImageViewDelegate? 
@@ -45,7 +52,15 @@ class FLCaptionedImageViewController: UIViewController {
         super.viewDidLoad()
 		setupView()
 		self.view.backgroundColor = bgColor
+		self.toolbarStackView.backgroundColor = toolbarBgColor
+		registerNotifications()
+		view.addGestureRecognizer(UITapGestureRecognizer(target: self,
+														 action: #selector(dismissKeyboard)))
     }
+	
+	deinit {
+		unregisterNotifications()
+	}
 	
 	func configureSendButton(title: String? = nil,
 							 image: UIImage? = nil,
@@ -62,6 +77,27 @@ class FLCaptionedImageViewController: UIViewController {
 								   cornerRadius: cornerRadius,
 								   contentMode: contentMode)
 	
+	}
+	
+	
+	func registerNotifications() {
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(keyboardWillShow(_:)),
+											   name: UIResponder.keyboardWillShowNotification,
+											   object: nil)
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(keyboardWillDismiss(_:)),
+											   name: UIResponder.keyboardWillHideNotification,
+											   object: nil)
+	}
+	
+	func unregisterNotifications() {
+		NotificationCenter.default.removeObserver(self)
+	}
+	
+	@objc
+	func dismissKeyboard() {
+		view.endEditing(true)
 	}
 }
 
@@ -109,15 +145,21 @@ extension FLCaptionedImageViewController: FLImageViewProtocol {
 // MARK: - Adding subviews and setting constraints
 extension FLCaptionedImageViewController {
 	
+	var toolbarItemHeight: CGFloat { return 50 }
+	
 	private func setupView() {
+		addImageViewContainer()
+		addToolbar()
+	}
+	
+	private func addToolbar() {
 		view.addSubview(toolbarStackView)
 		NSLayoutConstraint.activate([
 			toolbarStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			toolbarStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			toolbarStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-			toolbarStackView.heightAnchor.constraint(equalToConstant: 50)
+			toolbarItemBottomConstraint,
+			toolbarStackView.heightAnchor.constraint(equalToConstant: toolbarItemHeight)
 		])
-		addImageViewContainer()
 	}
 	
 	private func addImageViewContainer() {
@@ -126,7 +168,8 @@ extension FLCaptionedImageViewController {
 			imageViewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			imageViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			imageViewContainer.topAnchor.constraint(equalTo: view.topAnchor),
-			imageViewContainer.bottomAnchor.constraint(equalTo: toolbarStackView.topAnchor),
+			imageViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+													   constant: -toolbarItemHeight),
 		])
 		addImageView()
 	}
@@ -139,5 +182,24 @@ extension FLCaptionedImageViewController {
 		let size = imageViewContainer.frame.size;
 		imageView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
 		self.imageViewVC.didMove(toParent: self)
+	}
+}
+
+// MARK: - Keyboard handling
+extension FLCaptionedImageViewController {
+	
+	@objc
+	func keyboardWillShow(_ notification: Notification) {
+		guard let rect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+		toolbarItemBottomConstraint.constant = -rect.size.height
+		toolbarStackView.becomeFirstResponder()
+		
+		self.view.layoutIfNeeded()
+	}
+	
+	@objc
+	func keyboardWillDismiss(_ notification: Notification) {
+		toolbarItemBottomConstraint.constant = 0
+		self.view.layoutIfNeeded()
 	}
 }
