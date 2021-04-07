@@ -26,7 +26,7 @@ public class FLCaptionedImageViewer: FLImageViewer {
 	@available(*, unavailable)
 	public override func addAction(title: String? = nil, image: UIImage? = nil, alignment: Alignment, textColor: UIColor? = nil, backgroundColor: UIColor = .clear, width: CGFloat? = nil, cornerRadius: CornerRadius? = nil, contentMode: UIView.ContentMode = .scaleAspectFit, action: @escaping (([FLImage], Int) -> Void)) { }
 	
-	func configureSendButton(title: String? = nil,
+	public func configureSendButton(title: String? = nil,
 							 image: UIImage? = nil,
 							 textColor: UIColor? = nil,
 							 backgroundColor: UIColor = .clear,
@@ -41,5 +41,26 @@ public class FLCaptionedImageViewer: FLImageViewer {
 														   width: width, cornerRadius: cornerRadius,
 														   contentMode: contentMode)
 		
+	}
+	
+	public func addCloseButton(title: String? = nil,
+						image: UIImage? = nil,
+						textColor: UIColor? = nil,
+						backgroundColor: UIColor = .clear,
+						width: CGFloat? = nil,
+						cornerRadius: CornerRadius? = nil,
+						contentMode: UIView.ContentMode = .scaleAspectFit) {
+		let title: String? = (title == nil && image == nil) ? "close" : title
+		
+		let action = FLButton.button(title: title,
+									 icon: image,
+									 textColor: textColor,
+									 backgroundColor: backgroundColor,
+									 cornerRadius: cornerRadius) {
+			
+			self.delegate?.didTapCloseButton()
+		}
+		
+		self.actions.append((action, .topLeft))
 	}
 }

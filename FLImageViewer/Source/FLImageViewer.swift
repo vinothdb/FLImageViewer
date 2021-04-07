@@ -60,6 +60,7 @@ protocol FLImageViewProtocol: UIViewController {
 
 public protocol FLImageViewDelegate: AnyObject {
 	func didSelect(images: [FLImage])
+	func didTapCloseButton()
 }
 
 public class FLImageViewer {

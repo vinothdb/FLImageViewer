@@ -12,6 +12,7 @@ import FLImageViewer
 class ViewController: UIViewController {
     
     let images = [#imageLiteral(resourceName: "monarch.png"),#imageLiteral(resourceName: "iphone"),#imageLiteral(resourceName: "fruits.png"),#imageLiteral(resourceName: "flowers")]
+	var imageViewer: FLCaptionedImageViewer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
         let config = FLImageViewerConfig(images: images)
         config.tileViewSize = 50
         
-		let imageViewer = FLCaptionedImageViewer(config: config)
+		imageViewer = FLCaptionedImageViewer(config: config)
 
 //        if #available(iOS 13.0, *) {
 //            imageViewer.addAction(image: UIImage(systemName: "xmark"), alignment: .topLeft) { (_, _) in
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
 //            // Fallback on earlier versions
 //        }
         imageViewer.addDeleteAction()
+		imageViewer.addCloseButton()
+		imageViewer.delegate = self
         
         if #available(iOS 13.0, *) {
             imageViewer.viewController.isModalInPresentation = true
@@ -39,3 +42,12 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: FLImageViewDelegate {
+	func didSelect(images: [FLImage]) {
+		print("selected images: \(images)")
+	}
+	
+	func didTapCloseButton() {
+		imageViewer.viewController.dismiss(animated: true, completion: nil)
+	}
+}

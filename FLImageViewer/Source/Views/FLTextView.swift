@@ -44,33 +44,10 @@ class FLTextView: UITextView {
 			heightContraint.constant = height
 		}
 	}
-//	var isOverSized: Bool = false {
-//		didSet {
-//			self.isScrollEnabled = isOverSized
-//			heightContraint.constant = min(maxHeight, max(minHeight, contentSize.height))
-//			UIView.animate(withDuration: 0.3) {
-//				self.layoutIfNeeded()
-//			}
-//		}
-//	}
-//
-//	let maxHeight: CGFloat = 100
-//	let minHeight: CGFloat = 50
-//
-//	var placeHolderText: String?
-//	var config: FLTextViewConfiguration!
-
 }
 
 extension FLTextView: UITextViewDelegate {
-	
-//	func textViewDidChange(_ textView: UITextView) {
-//		isOverSized = contentSize.height >= maxHeight
-////		if text.isEmpty, let placeHolder = placeHolderText {
-////			text = placeHolder
-////			textColor =
-////		}
-//	}
+
 }
 
 extension FLTextView {
