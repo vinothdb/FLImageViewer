@@ -12,6 +12,8 @@ class FLCaptionedImageViewController: UIViewController {
 	
 	let bgColor: UIColor = .white
 	let toolbarBgColor: UIColor = .white
+	var toolbarRequiredHeight: CGFloat = 50
+	let toolbarItemDefaultHeight: CGFloat = 50
 	
 	lazy var imageViewContainer: UIView = {
 		let containerView = UIView()
@@ -51,6 +53,15 @@ class FLCaptionedImageViewController: UIViewController {
 	
 	lazy var toolbarItemBottomConstraint: NSLayoutConstraint = {
 		return self.toolbarStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+	}()
+	
+	lazy var imageViewBottomConstraint: NSLayoutConstraint = {
+		return imageViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+														  constant: -toolbarItemDefaultHeight)
+	}()
+	
+	lazy var toolbarItemHeightConstraint: NSLayoutConstraint = {
+		return toolbarStackView.heightAnchor.constraint(equalToConstant: toolbarItemDefaultHeight)
 	}()
 	
 	weak var interfaceDelegate: FLImageViewDelegate? 
@@ -105,6 +116,13 @@ class FLCaptionedImageViewController: UIViewController {
 	func dismissKeyboard() {
 		captionTextView.resignFirstResponder()
 	}
+	
+	func resizeToolbar() {
+		toolbarRequiredHeight = captionTextView.expectedHeight
+		let toolbarHeight = max(toolbarRequiredHeight, toolbarItemDefaultHeight)
+		imageViewBottomConstraint.constant = -toolbarHeight
+		toolbarItemHeightConstraint.constant = toolbarHeight
+	}
 }
 
 // MARK: - Conforming to FLImageViewProtocol
@@ -154,8 +172,6 @@ extension FLCaptionedImageViewController: FLImageViewProtocol {
 // MARK: - Adding subviews and setting constraints
 extension FLCaptionedImageViewController {
 	
-	var toolbarItemHeight: CGFloat { return 50 }
-	
 	private func setupView() {
 		addImageViewContainer()
 		addToolbar()
@@ -167,7 +183,7 @@ extension FLCaptionedImageViewController {
 			toolbarStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			toolbarStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			toolbarItemBottomConstraint,
-			toolbarStackView.heightAnchor.constraint(equalToConstant: toolbarItemHeight)
+			toolbarItemHeightConstraint,
 		])
 	}
 	
@@ -177,8 +193,7 @@ extension FLCaptionedImageViewController {
 			imageViewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			imageViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			imageViewContainer.topAnchor.constraint(equalTo: view.topAnchor),
-			imageViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-													   constant: -toolbarItemHeight),
+			imageViewBottomConstraint,
 		])
 		addImageView()
 	}
@@ -217,6 +232,7 @@ extension FLCaptionedImageViewController {
 extension FLCaptionedImageViewController: FLTextViewDelegate {
 	func didChangeCaption(_ caption: String) {
 		currentImage.caption = caption
+		resizeToolbar()
 	}
 }
 
@@ -224,5 +240,6 @@ extension FLCaptionedImageViewController: FLTextViewDelegate {
 extension FLCaptionedImageViewController: FLViewControllerDelegate {
 	func didChangeSelectedImageIndex() {
 		captionTextView.text = currentImage.caption ?? ""
+		resizeToolbar()
 	}
 }
