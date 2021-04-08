@@ -86,8 +86,9 @@ class FLCaptionedImageViewController: UIViewController {
 		self.view.backgroundColor = bgColor
 		self.toolbarStackView.backgroundColor = toolbarBgColor
 		registerNotifications()
-		view.addGestureRecognizer(UITapGestureRecognizer(target: self,
-														 action: #selector(dismissKeyboard)))
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+		tapGesture.cancelsTouchesInView = false
+		view.addGestureRecognizer(tapGesture)
     }
 	
 	deinit {
