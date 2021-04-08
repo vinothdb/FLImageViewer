@@ -112,12 +112,14 @@ class FLTextView: UITextView {
 }
 
 extension FLTextView: UITextViewDelegate {
+	
+	func shouldShowPlaceholder(_ shouldShow: Bool) {
+		placeholderLabel.isHidden = !shouldShow
+	}
+	
 	func textViewDidChange(_ textView: UITextView) {
 		textViewDelegate?.didChangeCaption(self.text)
-		placeholderLabel.isHidden = !text.isEmpty
-		if self.placeholderLabel.isHidden != self.shouldHidePlaceHolder() {
-			self.setNeedsLayout()
-		}
+		shouldShowPlaceholder(text.isEmpty)
 	}
 }
 

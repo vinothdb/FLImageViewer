@@ -250,6 +250,14 @@ extension FLCaptionedImageViewController: FLTextViewDelegate {
 extension FLCaptionedImageViewController: FLViewControllerDelegate {
 	func didChangeSelectedImageIndex() {
 		captionTextView.text = currentImage.caption ?? ""
+		
+		if let caption = currentImage.caption, !caption.isEmpty {
+			captionTextView.text = caption
+			captionTextView.shouldShowPlaceholder(false)
+		} else {
+			captionTextView.text = ""
+			captionTextView.shouldShowPlaceholder(true)
+		}
 		resizeToolbar()
 	}
 }
