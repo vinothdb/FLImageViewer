@@ -33,6 +33,7 @@ class ViewController: UIViewController {
 //        }
         imageViewer.addDeleteAction()
 		imageViewer.addCloseButton()
+		imageViewer.configureCaptionView(placeHolder: "Add a caption here..")
 		imageViewer.delegate = self
         
         if #available(iOS 13.0, *) {

@@ -8,16 +8,28 @@
 
 import UIKit
 
-struct FLTextViewConfiguration {
-	var bgColor: UIColor = .white
-	var textColor: UIColor = .black
-	var placeholderTextColor: UIColor = .gray
-	var borderColor: UIColor = .gray
-	var cursorColor: UIColor = .black
-	var cornerRadius: CGFloat = 0
-	var borderWidth: CGFloat = 0
-	var font: UIFont = UIFont()
-	var noOfLines: Int = 4
+public struct FLTextViewConfiguration {
+	
+	let bgColor: UIColor
+	let textColor: UIColor
+	let placeholderTextColor: UIColor
+	let cursorColor: UIColor
+	let font: UIFont
+	let noOfLines: Int
+	
+	public init(bgColor: UIColor = .white,
+				textColor: UIColor = .black,
+				placeholderTextColor: UIColor = .gray,
+				cursorColor: UIColor = .black,
+				font: UIFont = .systemFont(ofSize: 16),
+				noOfLines: Int = 3) {
+		self.bgColor = bgColor
+		self.textColor = textColor
+		self.placeholderTextColor = placeholderTextColor
+		self.cursorColor = cursorColor
+		self.font = font
+		self.noOfLines = noOfLines
+	}
 }
 
 protocol FLTextViewDelegate: AnyObject {
@@ -61,7 +73,7 @@ class FLTextView: UITextView {
 		}
 	}
 	
-	let maxNoOfLines: Int = 3
+	var maxNoOfLines: Int = 3
 	var didFlashScrollIndicators = false
 	weak var textViewDelegate: FLTextViewDelegate?
 	
@@ -108,6 +120,17 @@ class FLTextView: UITextView {
 		rect.origin.x += 3
 		
 		return rect
+	}
+	
+	func configure(withPlaceholder placeholder: String? = "Add Caption", _ config: FLTextViewConfiguration) {
+		self.backgroundColor = config.bgColor
+		self.textColor = config.textColor
+		self.placeholderLabel.textColor = config.placeholderTextColor
+		self.tintColor = config.cursorColor
+		self.font = config.font
+		self.placeholderLabel.font = config.font
+		self.maxNoOfLines = config.noOfLines
+		self.placeholderLabel.text = placeholder
 	}
 }
 

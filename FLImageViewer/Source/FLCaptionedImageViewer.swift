@@ -63,4 +63,10 @@ public class FLCaptionedImageViewer: FLImageViewer {
 		
 		self.actions.append((action, .topLeft))
 	}
+	
+	public func configureCaptionView(placeHolder: String? = "Add Caption",
+									 config: FLTextViewConfiguration = FLTextViewConfiguration()) {
+		captionedImageViewerController.captionTextView.configure(withPlaceholder: placeHolder,
+																 config)
+	}
 }
