@@ -61,7 +61,7 @@ class FLTextView: UITextView {
 		}
 	}
 	
-	let maxNoOfLines: Int = 4
+	let maxNoOfLines: Int = 3
 	var didFlashScrollIndicators = false
 	weak var textViewDelegate: FLTextViewDelegate?
 	
@@ -175,6 +175,7 @@ extension FLTextView {
 		super.flashScrollIndicators()
 	}
 }
+
 extension FLTextView {
 	static func create(withText text: String? = nil,
 					   placeHolder: String? = "Add caption",

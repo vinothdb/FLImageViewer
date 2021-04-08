@@ -213,12 +213,10 @@ extension FLViewerController : UITableViewDelegate {
             let viewerTableScrolledToIndexPath = self.viewerTable.indexPathForRow(at: scrollView.contentOffset) else {
                 return
         }
-        
         self.tileListSelectedIndexpath = viewerTableScrolledToIndexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         guard tableView == self.tileListTable, self.tileListSelectedIndexpath != indexPath else {
             return
         }
@@ -276,7 +274,7 @@ extension FLViewerController : UITableViewDataSource {
 extension FLViewerController: FLImageViewProtocol {
 	
     func currentImageIndex() -> Int {
-        return self.viewerTable.indexPathForRow(at: self.viewerTable.contentOffset)?.row ?? 0
+		return tileListSelectedIndexpath.row
     }
     
     func reloadImages(images: [FLImage]) {

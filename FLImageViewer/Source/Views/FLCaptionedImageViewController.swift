@@ -71,7 +71,7 @@ class FLCaptionedImageViewController: UIViewController {
 	
 	lazy var imageViewBottomConstraint: NSLayoutConstraint = {
 		return imageViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-														  constant: -toolbarItemDefaultHeight)
+														  constant: -(toolbarItemDefaultHeight + 20))
 	}()
 	
 	lazy var toolbarItemHeightConstraint: NSLayoutConstraint = {
@@ -135,7 +135,6 @@ class FLCaptionedImageViewController: UIViewController {
 	func resizeToolbar() {
 		toolbarRequiredHeight = captionTextView.expectedHeight
 		let toolbarHeight = max(toolbarRequiredHeight, toolbarItemDefaultHeight)
-		imageViewBottomConstraint.constant = -toolbarHeight
 		toolbarItemHeightConstraint.constant = toolbarHeight
 		view.layoutIfNeeded()
 	}
@@ -175,8 +174,7 @@ extension FLCaptionedImageViewController: FLImageViewProtocol {
 	}
 	
 	func currentImageIndex() -> Int {
-		guard let viewerTable = imageViewVC.viewerTable else { return 0 }
-		return viewerTable.indexPathForRow(at: viewerTable.contentOffset)?.row ?? 0
+		return imageViewVC.currentImageIndex()
 	}
 	
 	func reloadImages(images: [FLImage]) {
@@ -255,15 +253,9 @@ extension FLCaptionedImageViewController: FLTextViewDelegate {
 // MARK: - FLViewControllerDelegate conformation
 extension FLCaptionedImageViewController: FLViewControllerDelegate {
 	func didChangeSelectedImageIndex() {
-		captionTextView.text = currentImage.caption ?? ""
-		
-		if let caption = currentImage.caption, !caption.isEmpty {
-			captionTextView.text = caption
-			captionTextView.shouldShowPlaceholder(false)
-		} else {
-			captionTextView.text = ""
-			captionTextView.shouldShowPlaceholder(true)
-		}
-		resizeToolbar()
+		let caption = self.currentImage.caption ?? ""
+		self.captionTextView.text = caption
+		self.captionTextView.shouldShowPlaceholder(caption.isEmpty)
+		self.resizeToolbar()
 	}
 }
