@@ -42,22 +42,26 @@ class FLCaptionedImageViewController: UIViewController {
 	
 	lazy var captionTextView: FLTextView = {
 		let captionView = FLTextView.create()
+		captionView.translatesAutoresizingMaskIntoConstraints = false
 		captionView.textViewDelegate = self
 		return captionView
 	}()
 	
 	lazy var toolbarStackView: UIStackView = {
-		let stackView = UIStackView(arrangedSubviews: [captionTextView, sendButton])
+		
+		let containerView = UIView()
+		containerView.addSubview(sendButton)
+		containerView.translatesAutoresizingMaskIntoConstraints = false
+		
+		let stackView = UIStackView(arrangedSubviews: [captionTextView, containerView])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			captionTextView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
-			captionTextView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-			captionTextView.topAnchor.constraint(equalTo: stackView.topAnchor),
 			sendButton.leadingAnchor.constraint(equalTo: captionTextView.trailingAnchor, constant: 10),
-			sendButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10)
+			sendButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
+			sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+			
 		])
-		stackView.alignment = .center
-		stackView.spacing = 10
 		return stackView
 	}()
 	
@@ -132,6 +136,7 @@ class FLCaptionedImageViewController: UIViewController {
 		let toolbarHeight = max(toolbarRequiredHeight, toolbarItemDefaultHeight)
 		imageViewBottomConstraint.constant = -toolbarHeight
 		toolbarItemHeightConstraint.constant = toolbarHeight
+		view.layoutIfNeeded()
 	}
 }
 
