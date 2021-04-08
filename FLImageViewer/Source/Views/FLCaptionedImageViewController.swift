@@ -31,11 +31,12 @@ class FLCaptionedImageViewController: UIViewController {
 											  icon: nil,
 											  textColor: .white,
 											  backgroundColor: .blue,
-											  cornerRadius: .custom(25)) {
+											  cornerRadius: .custom(10)) {
 			
 			let currentIndex = self.currentImageIndex()
 			self.interfaceDelegate?.didSelect(images: self.images)
 		}
+		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
 	
@@ -48,6 +49,15 @@ class FLCaptionedImageViewController: UIViewController {
 	lazy var toolbarStackView: UIStackView = {
 		let stackView = UIStackView(arrangedSubviews: [captionTextView, sendButton])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			captionTextView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
+			captionTextView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+			captionTextView.topAnchor.constraint(equalTo: stackView.topAnchor),
+			sendButton.leadingAnchor.constraint(equalTo: captionTextView.trailingAnchor, constant: 10),
+			sendButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10)
+		])
+		stackView.alignment = .center
+		stackView.spacing = 10
 		return stackView
 	}()
 	
