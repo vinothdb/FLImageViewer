@@ -125,11 +125,24 @@ extension FLTextView: UITextViewDelegate {
 extension FLTextView {
 	
 	var expectedHeight: CGFloat {
-		sizeToFit()
-		self.flashScrollIndicatorsIfNeeded()
-		let isMaxLineExceeded = numberOfLines() > maxNoOfLines
-		isScrollEnabled = isMaxLineExceeded
-		return isMaxLineExceeded ? fontLineHeight() * CGFloat(maxNoOfLines) : contentSize.height
+		let noOfLine = numberOfLine()
+		let shouldExpand = noOfLine < self.maxNoOfLines + 1
+		isScrollEnabled = !shouldExpand
+		flashScrollIndicatorsIfNeeded()
+		let size = shouldExpand ? super.intrinsicContentSize : bounds.size
+		return size.height
+	}
+	
+	func sizeFit(width: CGFloat) -> CGSize {
+		let fixedWidth = width
+		let newSize = sizeThatFits(CGSize(width: fixedWidth, height: .greatestFiniteMagnitude))
+		return CGSize(width: fixedWidth, height: newSize.height)
+	}
+	
+	func numberOfLine() -> Int {
+		let size = self.sizeFit(width: self.bounds.width)
+		let numLines = Int(size.height / (self.font?.lineHeight ?? 1.0))
+		return numLines
 	}
 	
 	func fontLineHeight() -> CGFloat {
@@ -155,38 +168,9 @@ extension FLTextView {
 		}
 	}
 	
-	func numberOfLines() -> Int {
-		
-		var contentSize = self.contentSize
-		var contentHeight = contentSize.height
-		contentHeight -= (self.textContainerInset.top + self.textContainerInset.bottom)
-		
-		var lines = Int(contentHeight / self.fontLineHeight())
-		
-		if lines == 1 && contentSize.height > self.bounds.size.height {
-			contentSize.height = self.bounds.size.height
-			self.contentSize = contentSize
-		}
-		
-		if lines == 0 {
-			lines = 1
-		}
-		
-		return lines
-	}
-	
 	func flashScrollIndicatorsIfNeeded() {
-		
-		if numberOfLines() == maxNoOfLines + 1 {
-			
-			if !didFlashScrollIndicators {
-				didFlashScrollIndicators = true
-				super.flashScrollIndicators()
-			}
-			
-		} else if didFlashScrollIndicators {
-			didFlashScrollIndicators = false
-		}
+		guard numberOfLine() == maxNoOfLines + 1 else { return }
+		super.flashScrollIndicators()
 	}
 }
 extension FLTextView {
