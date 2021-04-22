@@ -46,7 +46,7 @@ public class FLButton: UIButton {
 		
 		if let image = icon {
 			setImage(image, for: .normal)
-			imageView?.contentMode = .scaleAspectFill
+			imageView?.contentMode = contentMode
 			widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
 		}
 	}

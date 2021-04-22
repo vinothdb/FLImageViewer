@@ -38,7 +38,8 @@ public class FLCaptionedImageViewer: FLImageViewer {
 														   image: image,
 														   textColor: textColor,
 														   backgroundColor: backgroundColor,
-														   width: width, cornerRadius: cornerRadius,
+														   width: width,
+														   cornerRadius: cornerRadius,
 														   contentMode: contentMode)
 		
 	}
