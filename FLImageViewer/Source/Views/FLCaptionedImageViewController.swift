@@ -63,6 +63,13 @@ class FLCaptionedImageViewController: UIViewController {
 			sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
 			sendButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
 		])
+		
+		// prior to iOS 14 can't add background color to stack view since it is a non-rendering view
+		if #available(iOS 14, *) {
+			stackView.backgroundColor = toolbarBgColor
+		} else {
+			stackView.addBackground(color: toolbarBgColor)
+		}
 		return stackView
 	}()
 	
