@@ -26,6 +26,7 @@ class FLCaptionedImageViewController: UIViewController {
 		vc.delegate = self
 		return vc
 	}()
+	
 	lazy var sendButton: FLButton = {
 		let button: FLButton = FLButton.button(title: "Send",
 											  icon: nil,
@@ -57,10 +58,10 @@ class FLCaptionedImageViewController: UIViewController {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			captionTextView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
-			sendButton.leadingAnchor.constraint(equalTo: captionTextView.trailingAnchor, constant: 10),
-			sendButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
-			sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-			
+			containerView.leadingAnchor.constraint(equalTo: captionTextView.trailingAnchor, constant: 10),
+			containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
+			sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+			sendButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
 		])
 		return stackView
 	}()
@@ -84,7 +85,6 @@ class FLCaptionedImageViewController: UIViewController {
         super.viewDidLoad()
 		setupView()
 		self.view.backgroundColor = bgColor
-		self.toolbarStackView.backgroundColor = toolbarBgColor
 		registerNotifications()
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 		tapGesture.cancelsTouchesInView = false
