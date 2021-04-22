@@ -74,7 +74,7 @@ class FLCaptionedImageViewController: UIViewController {
 	}()
 	
 	lazy var toolbarItemBottomConstraint: NSLayoutConstraint = {
-		return self.toolbarStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+		return self.toolbarStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
 	}()
 	
 	lazy var imageViewBottomConstraint: NSLayoutConstraint = {
@@ -244,7 +244,7 @@ extension FLCaptionedImageViewController {
 	
 	@objc
 	func keyboardWillDismiss(_ notification: Notification) {
-		toolbarItemBottomConstraint.constant = 0
+		toolbarItemBottomConstraint.constant = -20
 		self.view.layoutIfNeeded()
 	}
 }

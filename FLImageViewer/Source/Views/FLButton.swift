@@ -35,7 +35,7 @@ public class FLButton: UIButton {
 			}
 		}
 		
-		if let titleText = title {
+		if icon == nil, let titleText = title {
 			setTitle(titleText, for: .normal)
 			setTitleColor(textColor ?? FLAppColor.content, for: .normal)
 			sizeToFit()
@@ -48,6 +48,7 @@ public class FLButton: UIButton {
 			setImage(image, for: .normal)
 			imageView?.contentMode = contentMode
 			widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+			setTitle(nil, for: .normal)
 		}
 	}
 	

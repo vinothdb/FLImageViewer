@@ -34,6 +34,9 @@ class ViewController: UIViewController {
         imageViewer.addDeleteAction()
 		imageViewer.addCloseButton()
 		imageViewer.configureCaptionView(placeHolder: "Add a caption here..")
+		if #available(iOS 13.0, *) {
+			imageViewer.configureSendButton(image: UIImage(systemName: "star"), contentMode: .right)
+		}
 		imageViewer.delegate = self
         
         if #available(iOS 13.0, *) {
