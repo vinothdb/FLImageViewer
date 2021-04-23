@@ -13,7 +13,7 @@ public enum CornerRadius {
 }
 
 struct FLSizeConstants {
-    static let action: CGFloat = 30
+    static let action: CGFloat = 44
     static let actionTitle: CGFloat = 60
 }
 

@@ -49,21 +49,22 @@ class FLCaptionedImageViewController: UIViewController {
 	}()
 	
 	lazy var toolbarStackView: UIStackView = {
+
+		func getSpacer(width: CGFloat) -> UIView {
+			let spacer = UIView()
+			spacer.translatesAutoresizingMaskIntoConstraints = false
+			spacer.backgroundColor = .clear
+			spacer.widthAnchor.constraint(equalToConstant: width).isActive = true
+			return spacer
+		}
+
+		let leading = getSpacer(width: 10)
+		let trailing = getSpacer(width: 10)
 		
-		let containerView = UIView()
-		containerView.addSubview(sendButton)
-		containerView.translatesAutoresizingMaskIntoConstraints = false
-		
-		let stackView = UIStackView(arrangedSubviews: [captionTextView, containerView])
+		let stackView = UIStackView(arrangedSubviews: [leading, captionTextView, sendButton, trailing])
+		stackView.spacing = 10
 		stackView.translatesAutoresizingMaskIntoConstraints = false
-		NSLayoutConstraint.activate([
-			captionTextView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
-			containerView.leadingAnchor.constraint(equalTo: captionTextView.trailingAnchor, constant: 10),
-			containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
-			sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-			sendButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-		])
-		
+
 		// prior to iOS 14 can't add background color to stack view since it is a non-rendering view
 		if #available(iOS 14, *) {
 			stackView.backgroundColor = toolbarBgColor
@@ -106,14 +107,12 @@ class FLCaptionedImageViewController: UIViewController {
 							 image: UIImage? = nil,
 							 textColor: UIColor? = nil,
 							 backgroundColor: UIColor = .clear,
-							 width: CGFloat? = nil,
 							 cornerRadius: CornerRadius? = nil,
 							 contentMode: UIView.ContentMode = .scaleAspectFit) {
 		sendButton.configureButton(title: title,
 								   icon: image,
 								   textColor: textColor,
 								   backgroundColor: backgroundColor,
-								   width: width,
 								   cornerRadius: cornerRadius,
 								   contentMode: contentMode)
 	
@@ -221,11 +220,9 @@ extension FLCaptionedImageViewController {
 	
 	private func addImageView() {
 		guard let imageView = self.imageViewVC.view else { return }
-		imageViewVC.willMove(toParent: self)
 		addChild(self.imageViewVC)
+		imageView.frame = imageViewContainer.bounds
 		imageViewContainer.addSubview(imageView)
-		let size = imageViewContainer.frame.size;
-		imageView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
 		self.imageViewVC.didMove(toParent: self)
 	}
 }

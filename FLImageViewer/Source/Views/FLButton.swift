@@ -16,24 +16,13 @@ public class FLButton: UIButton {
 						 icon: UIImage? = nil,
 						 textColor: UIColor? = nil,
 						 backgroundColor: UIColor = .clear,
-						 width: CGFloat? = nil,
 						 cornerRadius: CornerRadius? = nil,
 						 contentMode: UIView.ContentMode = .scaleAspectFit) {
-		
-		let buttonWidth = width ?? (title != nil ? FLSizeConstants.actionTitle : FLSizeConstants.action)
+
+		let buttonWidth = (icon != nil ? FLSizeConstants.action : FLSizeConstants.actionTitle)
 		translatesAutoresizingMaskIntoConstraints = false
 		self.backgroundColor = backgroundColor
 		tintColor = textColor ?? FLAppColor.content
-		
-		if let cornerRadius = cornerRadius {
-			layer.masksToBounds = true
-			switch cornerRadius {
-			case .circle:
-				layer.cornerRadius = buttonWidth / 2
-			case .custom(let radius):
-				layer.cornerRadius = radius
-			}
-		}
 		
 		if icon == nil, let titleText = title {
 			setTitle(titleText, for: .normal)
@@ -46,9 +35,19 @@ public class FLButton: UIButton {
 		
 		if let image = icon {
 			setImage(image, for: .normal)
+			widthAnchor.constraint(equalToConstant: image.size.width).isActive = true
 			imageView?.contentMode = contentMode
-			widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
 			setTitle(nil, for: .normal)
+		}
+
+		if let cornerRadius = cornerRadius {
+			layer.masksToBounds = true
+			switch cornerRadius {
+			case .circle:
+				layer.cornerRadius = frame.height / 2
+			case .custom(let radius):
+				layer.cornerRadius = radius
+			}
 		}
 	}
 	
@@ -63,17 +62,17 @@ extension FLButton {
 							 icon: UIImage? = nil,
 							 textColor: UIColor? = nil,
 							 backgroundColor: UIColor = .clear,
-							 width: CGFloat? = nil,
 							 cornerRadius: CornerRadius? = nil,
 							 contentMode: UIView.ContentMode = .scaleAspectFit,
 							 action: @escaping (()-> Void)) -> FLButton {
 		
 		let button = FLButton(type: .custom)
+		button.contentVerticalAlignment = .center
+		button.contentHorizontalAlignment = .center
 		button.configureButton(title: title,
 							   icon: icon,
 							   textColor: textColor,
 							   backgroundColor: backgroundColor,
-							   width: width,
 							   cornerRadius: cornerRadius,
 							   contentMode: contentMode)
 		button.action = action
