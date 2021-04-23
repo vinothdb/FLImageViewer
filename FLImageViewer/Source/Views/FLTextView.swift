@@ -47,31 +47,8 @@ class FLTextView: UITextView {
 		super.init(coder: aDecoder)
 		setupView()
 	}
-	
-	lazy var heightContraint: NSLayoutConstraint = {
-			let constraint = self.heightAnchor.constraint(equalToConstant: width)
-			constraint.isActive = true
-			return constraint
-	}()
-	
-	lazy var widthContraint: NSLayoutConstraint = {
-		let constraint = self.widthAnchor.constraint(equalToConstant: width)
-		constraint.isActive = true
-		return constraint
-	}()
-	
+
 	lazy var placeholderLabel: UILabel = UILabel()
-	
-	var width: CGFloat = UIScreen.main.bounds.width {
-		didSet {
-			widthContraint.constant = width
-		}
-	}
-	var height: CGFloat = 50 {
-		didSet {
-			heightContraint.constant = height
-		}
-	}
 	
 	var maxNoOfLines: Int = 3
 	var didFlashScrollIndicators = false
@@ -122,7 +99,8 @@ class FLTextView: UITextView {
 		return rect
 	}
 	
-	func configure(withPlaceholder placeholder: String? = "Add Caption", _ config: FLTextViewConfiguration) {
+	func configure(withPlaceholder placeholder: String? = "Add Caption...",
+				   _ config: FLTextViewConfiguration) {
 		self.backgroundColor = config.bgColor
 		self.textColor = config.textColor
 		self.placeholderLabel.textColor = config.placeholderTextColor
@@ -200,13 +178,11 @@ extension FLTextView {
 }
 
 extension FLTextView {
+
 	static func create(withText text: String? = nil,
 					   placeHolder: String? = "Add caption",
-					   config: FLTextViewConfiguration = FLTextViewConfiguration(),
-					   width: CGFloat = 300) -> FLTextView {
+					   config: FLTextViewConfiguration = FLTextViewConfiguration()) -> FLTextView {
 		let textView = FLTextView()
-		textView.width = width
-		textView.height = 50
 		textView.isScrollEnabled = false
 		textView.placeholderLabel.text = placeHolder
 		textView.placeholderLabel.isHidden = false
